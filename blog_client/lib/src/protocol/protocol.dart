@@ -10,12 +10,8 @@
 library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixes
 
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
-import 'backend/backend_user.dart' as _i2;
-import 'example.dart' as _i3;
-import 'response.dart' as _i4;
-export 'backend/backend_user.dart';
-export 'example.dart';
-export 'response.dart';
+import 'admin/admin_user.dart' as _i2;
+export 'admin/admin_user.dart';
 export 'client.dart';
 
 class Protocol extends _i1.SerializationManager {
@@ -31,51 +27,27 @@ class Protocol extends _i1.SerializationManager {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i2.BackendUser) {
-      return _i2.BackendUser.fromJson(data) as T;
+    if (t == _i2.AdminUser) {
+      return _i2.AdminUser.fromJson(data) as T;
     }
-    if (t == _i3.Example) {
-      return _i3.Example.fromJson(data) as T;
-    }
-    if (t == _i4.Response) {
-      return _i4.Response.fromJson(data) as T;
-    }
-    if (t == _i1.getType<_i2.BackendUser?>()) {
-      return (data != null ? _i2.BackendUser.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i3.Example?>()) {
-      return (data != null ? _i3.Example.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i4.Response?>()) {
-      return (data != null ? _i4.Response.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i2.AdminUser?>()) {
+      return (data != null ? _i2.AdminUser.fromJson(data) : null) as T;
     }
     return super.deserialize<T>(data, t);
   }
 
   @override
   String? getClassNameForObject(Object data) {
-    if (data is _i2.BackendUser) {
-      return 'BackendUser';
-    }
-    if (data is _i3.Example) {
-      return 'Example';
-    }
-    if (data is _i4.Response) {
-      return 'Response';
+    if (data is _i2.AdminUser) {
+      return 'AdminUser';
     }
     return super.getClassNameForObject(data);
   }
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'BackendUser') {
-      return deserialize<_i2.BackendUser>(data['data']);
-    }
-    if (data['className'] == 'Example') {
-      return deserialize<_i3.Example>(data['data']);
-    }
-    if (data['className'] == 'Response') {
-      return deserialize<_i4.Response>(data['data']);
+    if (data['className'] == 'AdminUser') {
+      return deserialize<_i2.AdminUser>(data['data']);
     }
     return super.deserializeByClassName(data);
   }

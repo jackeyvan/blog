@@ -10,21 +10,21 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class BackendUser implements _i1.SerializableModel {
-  BackendUser._({
+abstract class AdminUser implements _i1.SerializableModel {
+  AdminUser._({
     this.id,
     required this.account,
     required this.password,
   });
 
-  factory BackendUser({
+  factory AdminUser({
     int? id,
     required String account,
     required String password,
-  }) = _BackendUserImpl;
+  }) = _AdminUserImpl;
 
-  factory BackendUser.fromJson(Map<String, dynamic> jsonSerialization) {
-    return BackendUser(
+  factory AdminUser.fromJson(Map<String, dynamic> jsonSerialization) {
+    return AdminUser(
       id: jsonSerialization['id'] as int?,
       account: jsonSerialization['account'] as String,
       password: jsonSerialization['password'] as String,
@@ -40,7 +40,7 @@ abstract class BackendUser implements _i1.SerializableModel {
 
   String password;
 
-  BackendUser copyWith({
+  AdminUser copyWith({
     int? id,
     String? account,
     String? password,
@@ -62,8 +62,8 @@ abstract class BackendUser implements _i1.SerializableModel {
 
 class _Undefined {}
 
-class _BackendUserImpl extends BackendUser {
-  _BackendUserImpl({
+class _AdminUserImpl extends AdminUser {
+  _AdminUserImpl({
     int? id,
     required String account,
     required String password,
@@ -74,12 +74,12 @@ class _BackendUserImpl extends BackendUser {
         );
 
   @override
-  BackendUser copyWith({
+  AdminUser copyWith({
     Object? id = _Undefined,
     String? account,
     String? password,
   }) {
-    return BackendUser(
+    return AdminUser(
       id: id is int? ? id : this.id,
       account: account ?? this.account,
       password: password ?? this.password,

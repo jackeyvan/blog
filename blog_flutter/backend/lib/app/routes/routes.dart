@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 
-import '../modules/home_page.dart';
-import '../modules/login_page.dart';
-import '../modules/root_page.dart';
+import '../modules/pages/home_page.dart';
+import '../modules/pages/login_page.dart';
+import '../modules/pages/root_page.dart';
 
 abstract class _Paths {
   static const root = '/';

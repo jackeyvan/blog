@@ -4,6 +4,8 @@ This is the starting point for your Serverpod server.
 
 To run your server, you first need to start Postgres and Redis. It's easiest to do with Docker.
 
+    serverpod generate
+
     docker compose up --build --detach
 
 Then you can start the Serverpod server.

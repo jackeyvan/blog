@@ -1,5 +1,3 @@
-backendLogin:
+adminLogin:
   - login:
   - register:
-example:
-  - hello:

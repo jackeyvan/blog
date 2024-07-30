@@ -10,23 +10,23 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:blog_client/src/protocol/response.dart' as _i3;
+import 'package:blog_client/src/protocol/admin/admin_user.dart' as _i3;
 import 'protocol.dart' as _i4;
 
 /// 管理后台登录
 /// {@category Endpoint}
-class EndpointBackendLogin extends _i1.EndpointRef {
-  EndpointBackendLogin(_i1.EndpointCaller caller) : super(caller);
+class EndpointAdminLogin extends _i1.EndpointRef {
+  EndpointAdminLogin(_i1.EndpointCaller caller) : super(caller);
 
   @override
-  String get name => 'backendLogin';
+  String get name => 'adminLogin';
 
-  _i2.Future<_i3.Response> login(
+  _i2.Future<_i3.AdminUser?> login(
     String account,
     String password,
   ) =>
-      caller.callServerEndpoint<_i3.Response>(
-        'backendLogin',
+      caller.callServerEndpoint<_i3.AdminUser?>(
+        'adminLogin',
         'login',
         {
           'account': account,
@@ -34,31 +34,17 @@ class EndpointBackendLogin extends _i1.EndpointRef {
         },
       );
 
-  _i2.Future<_i3.Response> register(
+  _i2.Future<_i3.AdminUser?> register(
     String account,
     String password,
   ) =>
-      caller.callServerEndpoint<_i3.Response>(
-        'backendLogin',
+      caller.callServerEndpoint<_i3.AdminUser?>(
+        'adminLogin',
         'register',
         {
           'account': account,
           'password': password,
         },
-      );
-}
-
-/// {@category Endpoint}
-class EndpointExample extends _i1.EndpointRef {
-  EndpointExample(_i1.EndpointCaller caller) : super(caller);
-
-  @override
-  String get name => 'example';
-
-  _i2.Future<String> hello(String name) => caller.callServerEndpoint<String>(
-        'example',
-        'hello',
-        {'name': name},
       );
 }
 
@@ -85,19 +71,14 @@ class Client extends _i1.ServerpodClient {
           onFailedCall: onFailedCall,
           onSucceededCall: onSucceededCall,
         ) {
-    backendLogin = EndpointBackendLogin(this);
-    example = EndpointExample(this);
+    adminLogin = EndpointAdminLogin(this);
   }
 
-  late final EndpointBackendLogin backendLogin;
-
-  late final EndpointExample example;
+  late final EndpointAdminLogin adminLogin;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {
-        'backendLogin': backendLogin,
-        'example': example,
-      };
+  Map<String, _i1.EndpointRef> get endpointRefLookup =>
+      {'adminLogin': adminLogin};
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};

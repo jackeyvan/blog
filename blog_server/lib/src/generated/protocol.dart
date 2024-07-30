@@ -11,12 +11,8 @@ library protocol; // ignore_for_file: no_leading_underscores_for_library_prefixe
 
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'backend/backend_user.dart' as _i3;
-import 'example.dart' as _i4;
-import 'response.dart' as _i5;
-export 'backend/backend_user.dart';
-export 'example.dart';
-export 'response.dart';
+import 'admin/admin_user.dart' as _i3;
+export 'admin/admin_user.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -27,8 +23,8 @@ class Protocol extends _i1.SerializationManagerServer {
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
     _i2.TableDefinition(
-      name: 'backend_user',
-      dartName: 'BackendUser',
+      name: 'admin_user',
+      dartName: 'AdminUser',
       schema: 'public',
       module: 'blog',
       columns: [
@@ -37,7 +33,7 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.bigint,
           isNullable: false,
           dartType: 'int?',
-          columnDefault: 'nextval(\'backend_user_id_seq\'::regclass)',
+          columnDefault: 'nextval(\'admin_user_id_seq\'::regclass)',
         ),
         _i2.ColumnDefinition(
           name: 'account',
@@ -55,7 +51,7 @@ class Protocol extends _i1.SerializationManagerServer {
       foreignKeys: [],
       indexes: [
         _i2.IndexDefinition(
-          indexName: 'backend_user_pkey',
+          indexName: 'admin_user_pkey',
           tableSpace: null,
           elements: [
             _i2.IndexElementDefinition(
@@ -79,23 +75,11 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.BackendUser) {
-      return _i3.BackendUser.fromJson(data) as T;
+    if (t == _i3.AdminUser) {
+      return _i3.AdminUser.fromJson(data) as T;
     }
-    if (t == _i4.Example) {
-      return _i4.Example.fromJson(data) as T;
-    }
-    if (t == _i5.Response) {
-      return _i5.Response.fromJson(data) as T;
-    }
-    if (t == _i1.getType<_i3.BackendUser?>()) {
-      return (data != null ? _i3.BackendUser.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i4.Example?>()) {
-      return (data != null ? _i4.Example.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i5.Response?>()) {
-      return (data != null ? _i5.Response.fromJson(data) : null) as T;
+    if (t == _i1.getType<_i3.AdminUser?>()) {
+      return (data != null ? _i3.AdminUser.fromJson(data) : null) as T;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
@@ -105,28 +89,16 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   String? getClassNameForObject(Object data) {
-    if (data is _i3.BackendUser) {
-      return 'BackendUser';
-    }
-    if (data is _i4.Example) {
-      return 'Example';
-    }
-    if (data is _i5.Response) {
-      return 'Response';
+    if (data is _i3.AdminUser) {
+      return 'AdminUser';
     }
     return super.getClassNameForObject(data);
   }
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
-    if (data['className'] == 'BackendUser') {
-      return deserialize<_i3.BackendUser>(data['data']);
-    }
-    if (data['className'] == 'Example') {
-      return deserialize<_i4.Example>(data['data']);
-    }
-    if (data['className'] == 'Response') {
-      return deserialize<_i5.Response>(data['data']);
+    if (data['className'] == 'AdminUser') {
+      return deserialize<_i3.AdminUser>(data['data']);
     }
     return super.deserializeByClassName(data);
   }
@@ -140,8 +112,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i3.BackendUser:
-        return _i3.BackendUser.t;
+      case _i3.AdminUser:
+        return _i3.AdminUser.t;
     }
     return null;
   }
