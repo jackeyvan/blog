@@ -1,0 +1,40 @@
+name: blog_flutter
+description: A new Flutter project with Serverpod.
+
+version: 1.0.0+1
+
+publish_to: none
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: '>=3.16.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.5
+
+  serverpod_flutter: 2.0.2
+  blog_client:
+    path: ../../blog_client
+
+  get: ^4.6.6
+  get_storage: ^2.1.1
+
+  cached_network_image: ^3.3.1
+
+  dio: ^5.5.0
+  pretty_dio_logger: ^1.3.1
+
+  logger: ^2.3.0
+
+dev_dependencies:
+  flutter_lints: '>=3.0.0 <5.0.0'
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
