@@ -10,20 +10,20 @@ import 'core/init/themes.dart';
 final client = Client('http://$localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
 
+/// 博客网站管理后台
 void main() async {
   await Get.putAsync(() => BackgroundService().dependencies());
 
-  runApp(const BlogApp());
+  runApp(const BlogBackendApp());
 }
 
-class BlogApp extends StatelessWidget {
-  const BlogApp({super.key});
+class BlogBackendApp extends StatelessWidget {
+  const BlogBackendApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: Routes.root,
-      // initialBinding: BlogBindings(),
+      initialRoute: Routes.login,
       debugShowCheckedModeBanner: false,
       getPages: Routes.routes,
       theme: AppTheme.light,

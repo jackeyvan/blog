@@ -9,19 +9,80 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../endpoints/example_endpoint.dart' as _i2;
+import '../endpoints/backend/backend_login.dart' as _i2;
+import '../endpoints/example_endpoint.dart' as _i3;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
   void initializeEndpoints(_i1.Server server) {
     var endpoints = <String, _i1.Endpoint>{
-      'example': _i2.ExampleEndpoint()
+      'backendLogin': _i2.BackendLogin()
+        ..initialize(
+          server,
+          'backendLogin',
+          null,
+        ),
+      'example': _i3.ExampleEndpoint()
         ..initialize(
           server,
           'example',
           null,
-        )
+        ),
     };
+    connectors['backendLogin'] = _i1.EndpointConnector(
+      name: 'backendLogin',
+      endpoint: endpoints['backendLogin']!,
+      methodConnectors: {
+        'login': _i1.MethodConnector(
+          name: 'login',
+          params: {
+            'account': _i1.ParameterDescription(
+              name: 'account',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'password': _i1.ParameterDescription(
+              name: 'password',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['backendLogin'] as _i2.BackendLogin).login(
+            session,
+            params['account'],
+            params['password'],
+          ),
+        ),
+        'register': _i1.MethodConnector(
+          name: 'register',
+          params: {
+            'account': _i1.ParameterDescription(
+              name: 'account',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'password': _i1.ParameterDescription(
+              name: 'password',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['backendLogin'] as _i2.BackendLogin).register(
+            session,
+            params['account'],
+            params['password'],
+          ),
+        ),
+      },
+    );
     connectors['example'] = _i1.EndpointConnector(
       name: 'example',
       endpoint: endpoints['example']!,
@@ -39,7 +100,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['example'] as _i2.ExampleEndpoint).hello(
+              (endpoints['example'] as _i3.ExampleEndpoint).hello(
             session,
             params['name'],
           ),

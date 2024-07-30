@@ -1,0 +1,5 @@
+class: BackendUser
+table: backend_user
+fields:
+  account: String
+  password: String

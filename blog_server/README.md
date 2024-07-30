@@ -8,7 +8,14 @@ To run your server, you first need to start Postgres and Redis. It's easiest to 
 
 Then you can start the Serverpod server.
 
-    dart bin/main.dart
+    dart bin/main.dart --apply-migrations
+
+    dart bin/main.dart --apply-repair-migration
+
+Update Database
+
+    serverpod create-migration
+
 
 When you are finished, you can shut down Serverpod with `Ctrl-C`, then stop Postgres and Redis.
 

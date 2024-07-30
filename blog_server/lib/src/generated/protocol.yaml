@@ -1,2 +1,5 @@
+backendLogin:
+  - login:
+  - register:
 example:
   - hello:

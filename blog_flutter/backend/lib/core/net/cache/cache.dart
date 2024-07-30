@@ -1,4 +1,3 @@
-import 'package:blog_flutter/core/init/init_core.dart';
 import 'package:blog_flutter/core/init/storage.dart';
 
 enum CacheMode {
@@ -53,6 +52,6 @@ class Cache {
         path += "$key=$value";
       });
     }
-    return md5(path);
+    return path;
   }
 }

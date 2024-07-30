@@ -1,4 +1,4 @@
-import 'package:blog_flutter/core/init/init_core.dart';
+import 'package:blog_flutter/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,8 +60,9 @@ class OverlayUtils {
 
   /// SnackBar
   static showSnackBar(String? msg) {
-    if (isNotNullOrBlank(msg)) {
-      Get.showSnackbar(GetSnackBar(title: msg));
+    if (CoreUtils.isNotNullOrBlank(msg)) {
+      Get.showSnackbar(
+          GetSnackBar(message: msg, duration: const Duration(seconds: 2)));
     }
   }
 }
