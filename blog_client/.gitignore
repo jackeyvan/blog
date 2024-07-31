@@ -11,4 +11,4 @@ build/
 
 # Directory created by dartdoc
 
-src/protocol/
+lib/src/protocol/
