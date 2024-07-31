@@ -8,6 +8,8 @@ To run your server, you first need to start Postgres and Redis. It's easiest to 
 
 Then you can start the Serverpod server.
 
+    serverpod generate
+
     dart bin/main.dart --apply-migrations
 
     dart bin/main.dart --apply-repair-migration

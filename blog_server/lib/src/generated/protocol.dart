@@ -14,6 +14,7 @@ import 'package:serverpod/protocol.dart' as _i2;
 import 'backend/backend_user.dart' as _i3;
 import 'example.dart' as _i4;
 import 'response.dart' as _i5;
+import 'package:blog_shared/src/api_response.dart' as _i6;
 export 'backend/backend_user.dart';
 export 'example.dart';
 export 'response.dart';
@@ -97,6 +98,12 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i5.Response?>()) {
       return (data != null ? _i5.Response.fromJson(data) : null) as T;
     }
+    if (t == _i6.ApiResponse) {
+      return _i6.ApiResponse.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i6.ApiResponse?>()) {
+      return (data != null ? _i6.ApiResponse.fromJson(data) : null) as T;
+    }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
@@ -105,6 +112,9 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   String? getClassNameForObject(Object data) {
+    if (data is _i6.ApiResponse) {
+      return 'ApiResponse';
+    }
     if (data is _i3.BackendUser) {
       return 'BackendUser';
     }
@@ -119,6 +129,9 @@ class Protocol extends _i1.SerializationManagerServer {
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
+    if (data['className'] == 'ApiResponse') {
+      return deserialize<_i6.ApiResponse>(data['data']);
+    }
     if (data['className'] == 'BackendUser') {
       return deserialize<_i3.BackendUser>(data['data']);
     }

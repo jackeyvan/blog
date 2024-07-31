@@ -1,3 +1,6 @@
 type: server
 
 client_package_path: ../blog_client
+
+extraClasses:
+  - package:blog_shared/src/api_response.dart:ApiResponse

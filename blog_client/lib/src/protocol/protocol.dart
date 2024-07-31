@@ -13,6 +13,7 @@ import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'backend/backend_user.dart' as _i2;
 import 'example.dart' as _i3;
 import 'response.dart' as _i4;
+import 'package:blog_shared/src/api_response.dart' as _i5;
 export 'backend/backend_user.dart';
 export 'example.dart';
 export 'response.dart';
@@ -49,11 +50,20 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i4.Response?>()) {
       return (data != null ? _i4.Response.fromJson(data) : null) as T;
     }
+    if (t == _i5.ApiResponse) {
+      return _i5.ApiResponse.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i5.ApiResponse?>()) {
+      return (data != null ? _i5.ApiResponse.fromJson(data) : null) as T;
+    }
     return super.deserialize<T>(data, t);
   }
 
   @override
   String? getClassNameForObject(Object data) {
+    if (data is _i5.ApiResponse) {
+      return 'ApiResponse';
+    }
     if (data is _i2.BackendUser) {
       return 'BackendUser';
     }
@@ -68,6 +78,9 @@ class Protocol extends _i1.SerializationManager {
 
   @override
   dynamic deserializeByClassName(Map<String, dynamic> data) {
+    if (data['className'] == 'ApiResponse') {
+      return deserialize<_i5.ApiResponse>(data['data']);
+    }
     if (data['className'] == 'BackendUser') {
       return deserialize<_i2.BackendUser>(data['data']);
     }
