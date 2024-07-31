@@ -10,31 +10,31 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 
-abstract class BackendUser extends _i1.TableRow
+abstract class AdminUser extends _i1.TableRow
     implements _i1.ProtocolSerialization {
-  BackendUser._({
+  AdminUser._({
     int? id,
     required this.account,
     required this.password,
   }) : super(id);
 
-  factory BackendUser({
+  factory AdminUser({
     int? id,
     required String account,
     required String password,
-  }) = _BackendUserImpl;
+  }) = _AdminUserImpl;
 
-  factory BackendUser.fromJson(Map<String, dynamic> jsonSerialization) {
-    return BackendUser(
+  factory AdminUser.fromJson(Map<String, dynamic> jsonSerialization) {
+    return AdminUser(
       id: jsonSerialization['id'] as int?,
       account: jsonSerialization['account'] as String,
       password: jsonSerialization['password'] as String,
     );
   }
 
-  static final t = BackendUserTable();
+  static final t = AdminUserTable();
 
-  static const db = BackendUserRepository._();
+  static const db = AdminUserRepository._();
 
   String account;
 
@@ -43,7 +43,7 @@ abstract class BackendUser extends _i1.TableRow
   @override
   _i1.Table get table => t;
 
-  BackendUser copyWith({
+  AdminUser copyWith({
     int? id,
     String? account,
     String? password,
@@ -66,26 +66,26 @@ abstract class BackendUser extends _i1.TableRow
     };
   }
 
-  static BackendUserInclude include() {
-    return BackendUserInclude._();
+  static AdminUserInclude include() {
+    return AdminUserInclude._();
   }
 
-  static BackendUserIncludeList includeList({
-    _i1.WhereExpressionBuilder<BackendUserTable>? where,
+  static AdminUserIncludeList includeList({
+    _i1.WhereExpressionBuilder<AdminUserTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<BackendUserTable>? orderBy,
+    _i1.OrderByBuilder<AdminUserTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<BackendUserTable>? orderByList,
-    BackendUserInclude? include,
+    _i1.OrderByListBuilder<AdminUserTable>? orderByList,
+    AdminUserInclude? include,
   }) {
-    return BackendUserIncludeList._(
+    return AdminUserIncludeList._(
       where: where,
       limit: limit,
       offset: offset,
-      orderBy: orderBy?.call(BackendUser.t),
+      orderBy: orderBy?.call(AdminUser.t),
       orderDescending: orderDescending,
-      orderByList: orderByList?.call(BackendUser.t),
+      orderByList: orderByList?.call(AdminUser.t),
       include: include,
     );
   }
@@ -98,8 +98,8 @@ abstract class BackendUser extends _i1.TableRow
 
 class _Undefined {}
 
-class _BackendUserImpl extends BackendUser {
-  _BackendUserImpl({
+class _AdminUserImpl extends AdminUser {
+  _AdminUserImpl({
     int? id,
     required String account,
     required String password,
@@ -110,12 +110,12 @@ class _BackendUserImpl extends BackendUser {
         );
 
   @override
-  BackendUser copyWith({
+  AdminUser copyWith({
     Object? id = _Undefined,
     String? account,
     String? password,
   }) {
-    return BackendUser(
+    return AdminUser(
       id: id is int? ? id : this.id,
       account: account ?? this.account,
       password: password ?? this.password,
@@ -123,8 +123,8 @@ class _BackendUserImpl extends BackendUser {
   }
 }
 
-class BackendUserTable extends _i1.Table {
-  BackendUserTable({super.tableRelation}) : super(tableName: 'backend_user') {
+class AdminUserTable extends _i1.Table {
+  AdminUserTable({super.tableRelation}) : super(tableName: 'admin_user') {
     account = _i1.ColumnString(
       'account',
       this,
@@ -147,19 +147,19 @@ class BackendUserTable extends _i1.Table {
       ];
 }
 
-class BackendUserInclude extends _i1.IncludeObject {
-  BackendUserInclude._();
+class AdminUserInclude extends _i1.IncludeObject {
+  AdminUserInclude._();
 
   @override
   Map<String, _i1.Include?> get includes => {};
 
   @override
-  _i1.Table get table => BackendUser.t;
+  _i1.Table get table => AdminUser.t;
 }
 
-class BackendUserIncludeList extends _i1.IncludeList {
-  BackendUserIncludeList._({
-    _i1.WhereExpressionBuilder<BackendUserTable>? where,
+class AdminUserIncludeList extends _i1.IncludeList {
+  AdminUserIncludeList._({
+    _i1.WhereExpressionBuilder<AdminUserTable>? where,
     super.limit,
     super.offset,
     super.orderBy,
@@ -167,33 +167,33 @@ class BackendUserIncludeList extends _i1.IncludeList {
     super.orderByList,
     super.include,
   }) {
-    super.where = where?.call(BackendUser.t);
+    super.where = where?.call(AdminUser.t);
   }
 
   @override
   Map<String, _i1.Include?> get includes => include?.includes ?? {};
 
   @override
-  _i1.Table get table => BackendUser.t;
+  _i1.Table get table => AdminUser.t;
 }
 
-class BackendUserRepository {
-  const BackendUserRepository._();
+class AdminUserRepository {
+  const AdminUserRepository._();
 
-  Future<List<BackendUser>> find(
+  Future<List<AdminUser>> find(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<BackendUserTable>? where,
+    _i1.WhereExpressionBuilder<AdminUserTable>? where,
     int? limit,
     int? offset,
-    _i1.OrderByBuilder<BackendUserTable>? orderBy,
+    _i1.OrderByBuilder<AdminUserTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<BackendUserTable>? orderByList,
+    _i1.OrderByListBuilder<AdminUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.find<BackendUser>(
-      where: where?.call(BackendUser.t),
-      orderBy: orderBy?.call(BackendUser.t),
-      orderByList: orderByList?.call(BackendUser.t),
+    return session.db.find<AdminUser>(
+      where: where?.call(AdminUser.t),
+      orderBy: orderBy?.call(AdminUser.t),
+      orderByList: orderByList?.call(AdminUser.t),
       orderDescending: orderDescending,
       limit: limit,
       offset: offset,
@@ -201,125 +201,125 @@ class BackendUserRepository {
     );
   }
 
-  Future<BackendUser?> findFirstRow(
+  Future<AdminUser?> findFirstRow(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<BackendUserTable>? where,
+    _i1.WhereExpressionBuilder<AdminUserTable>? where,
     int? offset,
-    _i1.OrderByBuilder<BackendUserTable>? orderBy,
+    _i1.OrderByBuilder<AdminUserTable>? orderBy,
     bool orderDescending = false,
-    _i1.OrderByListBuilder<BackendUserTable>? orderByList,
+    _i1.OrderByListBuilder<AdminUserTable>? orderByList,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findFirstRow<BackendUser>(
-      where: where?.call(BackendUser.t),
-      orderBy: orderBy?.call(BackendUser.t),
-      orderByList: orderByList?.call(BackendUser.t),
+    return session.db.findFirstRow<AdminUser>(
+      where: where?.call(AdminUser.t),
+      orderBy: orderBy?.call(AdminUser.t),
+      orderByList: orderByList?.call(AdminUser.t),
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
     );
   }
 
-  Future<BackendUser?> findById(
+  Future<AdminUser?> findById(
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.findById<BackendUser>(
+    return session.db.findById<AdminUser>(
       id,
       transaction: transaction,
     );
   }
 
-  Future<List<BackendUser>> insert(
+  Future<List<AdminUser>> insert(
     _i1.Session session,
-    List<BackendUser> rows, {
+    List<AdminUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insert<BackendUser>(
+    return session.db.insert<AdminUser>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<BackendUser> insertRow(
+  Future<AdminUser> insertRow(
     _i1.Session session,
-    BackendUser row, {
+    AdminUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.insertRow<BackendUser>(
+    return session.db.insertRow<AdminUser>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<BackendUser>> update(
+  Future<List<AdminUser>> update(
     _i1.Session session,
-    List<BackendUser> rows, {
-    _i1.ColumnSelections<BackendUserTable>? columns,
+    List<AdminUser> rows, {
+    _i1.ColumnSelections<AdminUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.update<BackendUser>(
+    return session.db.update<AdminUser>(
       rows,
-      columns: columns?.call(BackendUser.t),
+      columns: columns?.call(AdminUser.t),
       transaction: transaction,
     );
   }
 
-  Future<BackendUser> updateRow(
+  Future<AdminUser> updateRow(
     _i1.Session session,
-    BackendUser row, {
-    _i1.ColumnSelections<BackendUserTable>? columns,
+    AdminUser row, {
+    _i1.ColumnSelections<AdminUserTable>? columns,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.updateRow<BackendUser>(
+    return session.db.updateRow<AdminUser>(
       row,
-      columns: columns?.call(BackendUser.t),
+      columns: columns?.call(AdminUser.t),
       transaction: transaction,
     );
   }
 
-  Future<List<BackendUser>> delete(
+  Future<List<AdminUser>> delete(
     _i1.Session session,
-    List<BackendUser> rows, {
+    List<AdminUser> rows, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.delete<BackendUser>(
+    return session.db.delete<AdminUser>(
       rows,
       transaction: transaction,
     );
   }
 
-  Future<BackendUser> deleteRow(
+  Future<AdminUser> deleteRow(
     _i1.Session session,
-    BackendUser row, {
+    AdminUser row, {
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteRow<BackendUser>(
+    return session.db.deleteRow<AdminUser>(
       row,
       transaction: transaction,
     );
   }
 
-  Future<List<BackendUser>> deleteWhere(
+  Future<List<AdminUser>> deleteWhere(
     _i1.Session session, {
-    required _i1.WhereExpressionBuilder<BackendUserTable> where,
+    required _i1.WhereExpressionBuilder<AdminUserTable> where,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.deleteWhere<BackendUser>(
-      where: where(BackendUser.t),
+    return session.db.deleteWhere<AdminUser>(
+      where: where(AdminUser.t),
       transaction: transaction,
     );
   }
 
   Future<int> count(
     _i1.Session session, {
-    _i1.WhereExpressionBuilder<BackendUserTable>? where,
+    _i1.WhereExpressionBuilder<AdminUserTable>? where,
     int? limit,
     _i1.Transaction? transaction,
   }) async {
-    return session.db.count<BackendUser>(
-      where: where?.call(BackendUser.t),
+    return session.db.count<AdminUser>(
+      where: where?.call(AdminUser.t),
       limit: limit,
       transaction: transaction,
     );

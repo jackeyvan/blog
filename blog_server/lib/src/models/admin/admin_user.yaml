@@ -1,5 +1,5 @@
-class: BackendUser
-table: backend_user
+class: AdminUser
+table: admin_user
 fields:
   account: String
   password: String

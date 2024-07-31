@@ -1,6 +1,0 @@
-class: Response
-
-fields:
-  msg: String
-  code: int
-  data: String?
