@@ -21,13 +21,9 @@ class LoginPage extends BasePage<LoginController> {
   Widget buildPage(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Container(
-        // color: Colors.white,
-        // width: constraints.maxWidth,
-        // height: constraints.maxHeight,
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/bg_login.png"),
-                fit: BoxFit.fill)),
+                image: AssetImage("/images/bg_login.png"), fit: BoxFit.fill)),
         constraints: constraints,
         alignment: Alignment.center,
         child: SizedBox(
