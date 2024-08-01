@@ -4,7 +4,6 @@ import 'package:logger/logger.dart';
 
 import 'build_env.dart';
 import 'storage.dart';
-import 'themes.dart';
 
 /// 封装过的父类
 abstract class CoreService extends GetxService {
@@ -23,7 +22,7 @@ abstract class CoreService extends GetxService {
     await Storage.init();
 
     /// 初始化主题
-    AppTheme.changeTheme();
+    // AppTheme.changeTheme();
 
     /// 子类再去初始化
     init();

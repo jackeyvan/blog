@@ -7,7 +7,8 @@ class AppTheme {
   static const _themeKey = "themeKey";
   static const _themeModeKey = "themeMode";
 
-  static final light = generateTheme(brightness: Brightness.light);
+  static final light =
+      generateTheme(brightness: Brightness.light, colorSchemeSeed: Colors.teal);
 
   static final dark = generateTheme(brightness: Brightness.dark);
 

@@ -19,32 +19,40 @@ class LoginPage extends BasePage<LoginController> {
 
   @override
   Widget buildPage(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
-    return Center(
-      child: SizedBox(
-        width: width * 0.4,
-        height: height * 0.6,
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(72),
-            child: Column(
-              children: [
-                const Text("个人博客管理后台", style: TextStyle(fontSize: 32)),
-                const SizedBox(height: 60),
-                TextField(controller: controller.accountController),
-                const SizedBox(height: 42),
-                TextField(controller: controller.passwordController),
-                const SizedBox(height: 60),
-                SizedBox(
-                    height: 56,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () => controller.login(),
-                        child:
-                            const Text("登录", style: TextStyle(fontSize: 20))))
-              ],
+    return LayoutBuilder(
+      builder: (context, constraints) => Container(
+        // color: Colors.white,
+        // width: constraints.maxWidth,
+        // height: constraints.maxHeight,
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/bg_login.png"),
+                fit: BoxFit.fill)),
+        constraints: constraints,
+        alignment: Alignment.center,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.2,
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(60),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text("个人博客管理后台", style: TextStyle(fontSize: 32)),
+                  const SizedBox(height: 60),
+                  TextField(controller: controller.accountController),
+                  const SizedBox(height: 42),
+                  TextField(controller: controller.passwordController),
+                  const SizedBox(height: 60),
+                  SizedBox(
+                      height: 56,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () => controller.login(),
+                          child:
+                              const Text("登录", style: TextStyle(fontSize: 20))))
+                ],
+              ),
             ),
           ),
         ),
