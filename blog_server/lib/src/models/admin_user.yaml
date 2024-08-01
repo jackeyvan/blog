@@ -1,5 +1,7 @@
 class: AdminUser
+
 table: admin_user
+
 fields:
   account: String
   password: String

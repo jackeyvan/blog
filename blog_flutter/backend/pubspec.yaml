@@ -19,6 +19,10 @@ dependencies:
   blog_client:
     path: ../../blog_client
 
+  blog_shared:
+    path: ../../blog_shared
+
+
   get: ^4.6.6
   get_storage: ^2.1.1
 

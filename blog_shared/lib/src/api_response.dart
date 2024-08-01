@@ -1,7 +1,16 @@
+import 'dart:convert';
+
 class ApiResponse {
-  final String? msg;
-  final int? code;
+  final String msg;
+  final int code;
   final dynamic data;
+
+  ApiResponse({required this.msg, required this.code, required this.data});
+
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
 
   factory ApiResponse.fromJson(Map<String, dynamic> json) {
     return ApiResponse(
@@ -10,8 +19,6 @@ class ApiResponse {
       data: json['data'],
     );
   }
-
-  ApiResponse({this.msg, this.code, this.data});
 
   Map<String, dynamic> toJson() {
     return {

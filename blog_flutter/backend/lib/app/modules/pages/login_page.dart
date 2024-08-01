@@ -68,6 +68,8 @@ class LoginController extends BaseController {
     }
 
     AdminRepository.login(account, password).then((user) {
+      print(user.toString());
+
       if (user != null) {
         OverlayUtils.showSnackBar("登录成功");
         Get.toNamed(Routes.root);

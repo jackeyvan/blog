@@ -17,3 +17,7 @@ config/firebase_service_account_key.json
 migrations/
 
 lib/src/generated/
+
+pubspec.lock
+
+repair-migration/
