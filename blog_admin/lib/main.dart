@@ -18,7 +18,7 @@ class BlogBackendApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialRoute: Routes.login,
+        initialRoute: Routes.root,
         debugShowCheckedModeBanner: false,
         getPages: Routes.routes,
         theme: AppTheme.light);

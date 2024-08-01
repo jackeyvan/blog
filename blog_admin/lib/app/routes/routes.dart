@@ -18,7 +18,7 @@ class Routes {
   static const login = _Paths.login;
 
   static final routes = [
-    GetPage(name: root, page: () => const RootPage()),
+    GetPage(name: root, page: () => const RootPage(), binding: RootBinding()),
     GetPage(name: home, page: () => const HomePage()),
     GetPage(
         name: login, page: () => const LoginPage(), binding: LoginBinding()),

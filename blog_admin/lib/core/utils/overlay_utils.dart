@@ -1,5 +1,6 @@
 import 'package:blog_flutter/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 /// 封装顶级弹窗工具类
@@ -64,5 +65,14 @@ class OverlayUtils {
       Get.showSnackbar(
           GetSnackBar(message: msg, duration: const Duration(seconds: 2)));
     }
+  }
+
+  static showToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.TOP,
+      webPosition: "center",
+    );
   }
 }

@@ -17,7 +17,7 @@ class ApiError implements Exception {
   @override
   String toString() {
     message ??= defaultError;
-    code = code ?? 0 + 1000;
-    return "$message($code)";
+    code ??= 0;
+    return "$message(${code! + 1000})";
   }
 }
