@@ -15,10 +15,6 @@ dependencies:
 
   cupertino_icons: ^1.0.5
 
-  serverpod_flutter: 2.0.2
-  blog_client:
-    path: ../blog_client
-
   get: ^4.6.6
   get_storage: ^2.1.1
 

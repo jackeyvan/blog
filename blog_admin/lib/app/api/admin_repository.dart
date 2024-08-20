@@ -7,9 +7,9 @@ class AdminApiPaths {}
 class AdminRepository {
   static final _api = Get.find<AdminApi>();
 
-  static Future login(String account, String password) {
-    return _api.client.adminLogin
-        .login(account, password)
-        .then((response) => _api.convert(response));
-  }
+  // static Future login(String account, String password) {
+  //   return _api.client.adminLogin
+  //       .login(account, password)
+  //       .then((response) => _api.convert(response));
+  // }
 }

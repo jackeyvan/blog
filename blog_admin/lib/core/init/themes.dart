@@ -1,14 +1,12 @@
+import 'package:blog_flutter/core/init/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'storage.dart';
 
 class AppTheme {
   static const _themeKey = "themeKey";
   static const _themeModeKey = "themeMode";
 
-  static final light =
-      generateTheme(brightness: Brightness.light, colorSchemeSeed: Colors.teal);
+  static final light = generateTheme(brightness: Brightness.light);
 
   static final dark = generateTheme(brightness: Brightness.dark);
 

@@ -55,6 +55,7 @@ abstract class BaseApi {
     Map<String, dynamic>? params,
     CacheMode? cacheMode,
     Duration? cacheExpire,
+    Object? body,
   }) =>
       _request<T>(
           url: url,
@@ -62,6 +63,7 @@ abstract class BaseApi {
           params: params,
           options: options,
           cacheMode: cacheMode,
+          body: body,
           cacheExpire: cacheExpire);
 
   /// 底层封装的Dio请求
@@ -72,14 +74,15 @@ abstract class BaseApi {
     Options? options,
     CacheMode? cacheMode,
     Duration? cacheExpire,
+    Object? body,
   }) {
     options ??= Options(extra: {});
 
     /// 更新缓存策略
     if (cacheMode != null) {
-      options.extra?.addAll({"cacheMode": cacheMode});
+      options.extra?["cacheMode"] = cacheMode;
     } else if (cacheExpire != null) {
-      options.extra?.addAll({"cacheExpire": cacheExpire.inMilliseconds});
+      options.extra?["cacheExpire"] = cacheExpire.inMilliseconds;
     }
 
     Future<Response> future;
@@ -87,7 +90,8 @@ abstract class BaseApi {
     if (method == Method.get) {
       future = _dio.get(url, queryParameters: params, options: options);
     } else {
-      future = _dio.post(url, queryParameters: params, options: options);
+      future =
+          _dio.post(url, queryParameters: params, options: options, data: body);
     }
     return future
 
@@ -103,7 +107,11 @@ abstract class BaseApi {
     })
 
         /// 统一错误
-        .onError((error, _) => throw ApiError(origin: error.toString()));
+        .onError((error, _) {
+      error is ApiError
+          ? throw error
+          : throw ApiError(origin: error.toString());
+    });
   }
 
   /// Dio 网络下载

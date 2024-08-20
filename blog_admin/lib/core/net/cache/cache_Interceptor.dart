@@ -1,6 +1,5 @@
+import 'package:blog_flutter/core/net/cache/cache.dart';
 import 'package:dio/dio.dart';
-
-import 'cache.dart';
 
 /// 缓存拦截器
 class CacheInterceptor extends Interceptor {

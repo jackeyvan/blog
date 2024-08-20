@@ -1,3 +1,4 @@
+import 'package:blog_flutter/core/init/init_core.dart';
 import 'package:blog_flutter/core/init/storage.dart';
 
 enum CacheMode {
@@ -24,8 +25,13 @@ class Cache {
     var cache = Storage.read<Map<String, dynamic>>(key);
 
     /// 缓存没有过期
-    if (cache != null && !_expired(cache["timestamp"], cache["expire"])) {
-      return cache["data"] as T?;
+    if (cache != null) {
+      if (_expired(cache["timestamp"], cache["expire"])) {
+        /// 如果缓存过期，则删除
+        Storage.remove(key);
+      } else {
+        return cache["data"] as T?;
+      }
     }
     return null;
   }
@@ -52,6 +58,6 @@ class Cache {
         path += "$key=$value";
       });
     }
-    return path;
+    return md5(path);
   }
 }

@@ -1,5 +1,5 @@
 name: blog_flutter
-description: A new Flutter project with Serverpod.
+description: Flutter版本博客系统
 
 version: 1.0.0+1
 
@@ -14,14 +14,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.5
-
-  serverpod_flutter: 2.0.2
-  blog_client:
-    path: ../blog_client
-
-  blog_shared:
-    path: ../blog_shared
-
 
   get: ^4.6.6
   get_storage: ^2.1.1

@@ -1,6 +1,6 @@
 class ApiError implements Exception {
   String? message;
-  int? code;
+  final int? code;
 
   static const defaultError = "请求失败";
   static const parseError = "数据解析异常";
@@ -17,7 +17,7 @@ class ApiError implements Exception {
   @override
   String toString() {
     message ??= defaultError;
-    code ??= 0;
-    return "$message(${code! + 1000})";
+    final error = code == null ? message : "$message($code)";
+    return error ?? defaultError;
   }
 }

@@ -1,42 +1,40 @@
-import 'package:blog_flutter/core/utils/core_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 /// 封装顶级弹窗工具类
 class OverlayUtils {
   /// 普通的提示对话框
-  static AlertDialog buildDialog(
-    String content, {
-    String? title,
-    String? cancel,
-    String? confirm,
-    VoidCallback? onConfirm,
-    VoidCallback? onCancel,
-  }) {
-    return AlertDialog(
-      title: Text(title ?? '温馨提示'),
-      content: Text(content),
-      actions: <Widget>[
-        TextButton(
-          child: Text(cancel ?? '取消'),
-          onPressed: () {
-            onCancel != null
-                ? onCancel.call()
-                : Get.back(); // Dismiss alert dialog
-          },
-        ),
-        TextButton(
-          child: Text(confirm ?? '确认'),
-          onPressed: () {
-            onConfirm != null
-                ? onConfirm.call()
-                : Get.back(); // Dismiss alert dialog
-          },
-        ),
-      ],
-    );
-  }
+  // static AlertDialog buildDialog(
+  //   String content, {
+  //   String? title,
+  //   String? cancel,
+  //   String? confirm,
+  //   VoidCallback? onConfirm,
+  //   VoidCallback? onCancel,
+  // }) {
+  //   return AlertDialog(
+  //     title: Text(title ?? '温馨提示'),
+  //     content: Text(content),
+  //     actions: <Widget>[
+  //       TextButton(
+  //         child: Text(cancel ?? '取消'),
+  //         onPressed: () {
+  //           onCancel != null
+  //               ? onCancel.call()
+  //               : Routes.back(); // Dismiss alert dialog
+  //         },
+  //       ),
+  //       TextButton(
+  //         child: Text(confirm ?? '确认'),
+  //         onPressed: () {
+  //           onConfirm != null
+  //               ? onConfirm.call()
+  //               : Routes.back(); // Dismiss alert dialog
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
 
   /// 展示加载弹窗
   static Future<T> showOverlay<T>(Future<T> Function() onLoad) {
@@ -59,20 +57,22 @@ class OverlayUtils {
         asyncFunction: onLoad);
   }
 
-  /// SnackBar
-  static showSnackBar(String? msg) {
-    if (CoreUtils.isNotNullOrBlank(msg)) {
-      Get.showSnackbar(
-          GetSnackBar(message: msg, duration: const Duration(seconds: 2)));
-    }
-  }
-
-  static showToast(String msg) {
-    Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
-      webPosition: "center",
-    );
-  }
+  /// 吐司
+  // static showToast(String? msg) {
+  //   if (isNotNullOrBlank(msg)) {
+  //     f_toast.Fluttertoast.showToast(
+  //         msg: msg!,
+  //         timeInSecForIosWeb: 1,
+  //         toastLength: f_toast.Toast.LENGTH_SHORT,
+  //         gravity: f_toast.ToastGravity.CENTER,
+  //         fontSize: 16.0);
+  //   }
+  // }
+  //
+  // /// SnackBar
+  // static showSnackBar(String? msg) {
+  //   if (isNotNullOrBlank(msg)) {
+  //     Get.showSnackbar(GetSnackBar(title: msg));
+  //   }
+  // }
 }
