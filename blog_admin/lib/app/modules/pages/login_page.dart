@@ -1,9 +1,14 @@
 import 'dart:ui';
 
 import 'package:blog_flutter/core/page/base/base_controller.dart';
-import 'package:blog_flutter/core/page/base/base_page @override
+import 'package:blog_flutter/core/page/base/base_page.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class LoginBinding extends Bindings {
+  @override
   void dependencies() {
-    Get.put(LoginController());
+    Get.lazyPut(() => LoginController());
   }
 }
 
