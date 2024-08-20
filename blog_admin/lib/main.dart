@@ -7,7 +7,7 @@ import 'core/init/themes.dart';
 
 /// 博客网站管理后台
 void main() async {
-  await Get.putAsync(() => BackgroundService().dependencies());
+  await BackgroundService().dependencies();
 
   runApp(const BlogBackendApp());
 }

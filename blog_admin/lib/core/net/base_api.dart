@@ -1,5 +1,5 @@
-import 'package:blog_flutter/core/net/api_error.dart';
-import 'package:blog_flutter/core/net/cache/cache.dart';
+import 'package:blog_admin/core/net/api_error.dart';
+import 'package:blog_admin/core/net/cache/cache.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

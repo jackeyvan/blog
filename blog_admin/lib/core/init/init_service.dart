@@ -1,7 +1,6 @@
-import 'package:blog_flutter/core/init/build_env.dart';
-import 'package:blog_flutter/core/init/storage.dart';
-import 'package:blog_flutter/core/init/themes.dart';
-import 'package:blog_flutter/core/utils/log_utils.dart';
+import 'package:blog_admin/core/init/storage.dart';
+import 'package:blog_admin/core/init/themes.dart';
+import 'package:blog_admin/core/utils/log_utils.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
@@ -11,9 +10,6 @@ abstract class CoreService extends GetxService {
 
   /// 第一次初始化相关服务
   dependencies() async {
-    /// 初始化环境
-    Get.put(BuildEnv.dev());
-
     /// 初始化日志
     Get.put(Logger(printer: PrettyPrinter(), filter: DefaultFilter()),
         permanent: true);

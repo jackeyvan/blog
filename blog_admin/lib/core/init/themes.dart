@@ -1,4 +1,4 @@
-import 'package:blog_flutter/core/init/storage.dart';
+import 'package:blog_admin/core/init/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

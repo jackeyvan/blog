@@ -1,4 +1,4 @@
-import 'package:blog_flutter/core/net/cache/cache.dart';
+import 'package:blog_admin/core/net/cache/cache.dart';
 import 'package:dio/dio.dart';
 
 /// 缓存拦截器

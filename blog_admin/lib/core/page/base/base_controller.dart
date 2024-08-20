@@ -1,4 +1,4 @@
-import 'package:blog_flutter/core/page/widgets/keep_alive_wrapper.dart';
+import 'package:blog_admin/core/page/widgets/keep_alive_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

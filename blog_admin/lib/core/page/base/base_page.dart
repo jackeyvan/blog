@@ -1,6 +1,6 @@
-import 'package:blog_flutter/core/page/status/default_empty_page.dart';
-import 'package:blog_flutter/core/page/status/default_error_page.dart';
-import 'package:blog_flutter/core/page/status/default_loading_page.dart';
+import 'package:blog_admin/core/page/status/default_empty_page.dart';
+import 'package:blog_admin/core/page/status/default_error_page.dart';
+import 'package:blog_admin/core/page/status/default_loading_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

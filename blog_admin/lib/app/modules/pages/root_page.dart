@@ -1,6 +1,7 @@
-import 'package:blog_flutter/app/modules/model/left_menu_model.dart';
-import 'package:blog_flutter/core/page/base/base_controller.dart';
-import 'package:blog_flutter/core/page/base/base_page.dart';
+import 'package:blog_admin/app/modules/model/left_menu_model.dart';
+import 'package:blog_admin/app/modules/pages/home_page.dart';
+import 'package:blog_admin/core/page/base/base_controller.dart';
+import 'package:blog_admin/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,35 +11,11 @@ class RootPage extends BasePage<RootController> {
   @override
   Widget buildPage(BuildContext context) {
     final leftSides = controller.buildLeftSides();
-
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
-    return Theme(
-        data: ThemeData.light().copyWith(
-            // primaryColor: Colors.deepOrangeAccent,
-            // scaffoldBackgroundColor: Colors.white
-            ),
-        child: Scaffold(
-            body: Row(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-              Theme(
-                  data: ThemeData.dark(),
-                  child: Container(
-                    width: width * 0.12,
-                    color: Colors.blueGrey,
-                    height: height,
-                    child: ListView.builder(
-                        padding: const EdgeInsets.only(top: 18, left: 18),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) =>
-                            buildItem(leftSides[index]),
-                        itemCount: leftSides.length),
-                  )),
-              const Expanded(child: Text("RightSideWidget"))
-            ])));
+    return Scaffold(
+        drawer: buildMenuDrawer(leftSides),
+        body: Row(
+          children: [buildMenuDrawer(leftSides), buildBody()],
+        ));
   }
 
   Widget buildItem(LeftMenuModel model) {
@@ -54,11 +31,44 @@ class RootPage extends BasePage<RootController> {
     return ListTile(
         title: Text(model.name),
         leading: model.leading,
+        onTap: () => controller.currentType.value = model.type ?? 0,
         trailing: model.trailing);
+  }
+
+  buildMenuDrawer(List<LeftMenuModel> leftSides) {
+    return Drawer(
+      child: ListView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 18),
+          shrinkWrap: true,
+          itemBuilder: (context, index) => buildItem(leftSides[index]),
+          itemCount: leftSides.length),
+    );
+  }
+
+  buildBody() {
+    return Obx(() {
+      switch (controller.currentType.value) {
+        case 1:
+          return keepWidgetAlive(HomePage());
+        case 2:
+          return Center(child: Text("图片"));
+        case 3:
+          return Center(child: Text("时间线"));
+        case 4:
+          return Center(child: Text("博客列表"));
+        case 5:
+          return Center(child: Text("添加博客"));
+
+        default:
+          return Center(child: Text("首页"));
+      }
+    });
   }
 }
 
 class RootController extends BaseController {
+  final currentType = 0.obs;
+
   List<LeftMenuModel> buildLeftSides() {
     return [
       LeftMenuModel(
@@ -72,11 +82,18 @@ class RootController extends BaseController {
             LeftMenuModel(
                 name: "博客",
                 leading: const Icon(Icons.bookmark_add),
-                isSub: true),
+                isSub: true,
+                type: 1),
             LeftMenuModel(
-                name: "图片", leading: const Icon(Icons.image), isSub: true),
+                name: "图片",
+                leading: const Icon(Icons.image),
+                isSub: true,
+                type: 2),
             LeftMenuModel(
-                name: "时间线", leading: const Icon(Icons.timelapse), isSub: true),
+                name: "时间线",
+                leading: const Icon(Icons.timelapse),
+                isSub: true,
+                type: 3),
           ]),
       LeftMenuModel(
           name: "博客管理",
@@ -84,9 +101,15 @@ class RootController extends BaseController {
           trailing: const Icon(Icons.arrow_drop_down_outlined),
           menus: [
             LeftMenuModel(
-                name: "博客列表", leading: const Icon(Icons.list), isSub: true),
+                name: "博客列表",
+                leading: const Icon(Icons.list),
+                isSub: true,
+                type: 4),
             LeftMenuModel(
-                name: "添加博客", leading: const Icon(Icons.add), isSub: true),
+                name: "添加博客",
+                leading: const Icon(Icons.add),
+                isSub: true,
+                type: 5),
           ]),
     ];
   }

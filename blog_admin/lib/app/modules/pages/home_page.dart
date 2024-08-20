@@ -1,4 +1,4 @@
-import 'package:blog_flutter/core/page/base/base_page.dart';
+import 'package:blog_admin/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends BasePage {

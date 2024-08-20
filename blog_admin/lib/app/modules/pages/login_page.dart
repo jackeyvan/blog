@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:blog_flutter/core/page/base/base_controller.dart';
-import 'package:blog_flutter/core/page/base/base_page.dart';
+import 'package:blog_admin/core/page/base/base_controller.dart';
+import 'package:blog_admin/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

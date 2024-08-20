@@ -1,5 +1,5 @@
-import 'package:blog_flutter/core/init/init_core.dart';
-import 'package:blog_flutter/core/init/storage.dart';
+import 'package:blog_admin/core/init/init_core.dart';
+import 'package:blog_admin/core/init/storage.dart';
 
 enum CacheMode {
   /// 只使用本地缓存，没有缓存返回null

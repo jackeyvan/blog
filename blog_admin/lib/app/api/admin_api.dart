@@ -1,5 +1,5 @@
-import 'package:blog_flutter/core/net/api_error.dart';
-import 'package:blog_flutter/core/net/base_api.dart';
+import 'package:blog_admin/core/net/api_error.dart';
+import 'package:blog_admin/core/net/base_api.dart';
 import 'package:dio/dio.dart';
 
 class AdminApi extends BaseApi {
