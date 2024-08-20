@@ -9,9 +9,9 @@ part of 'api.dart';
 Router _$V1ApiRouter(V1Api service) {
   final router = Router();
   router.add(
-    'GET',
-    r'/banner',
-    service.fetchBanner,
+    'POST',
+    r'/login',
+    service.login,
   );
   return router;
 }

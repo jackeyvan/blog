@@ -4,7 +4,7 @@ import 'package:shelf_router/shelf_router.dart';
 
 class RouteHandler {
   Response _rootHandler(Request req) {
-    return Response.ok('Dart server run success.');
+    return Response.ok('Dart blog server run success.');
   }
 
   /// Api Route
