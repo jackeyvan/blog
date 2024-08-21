@@ -1,32 +1,29 @@
+import 'dart:convert';
+
+import 'package:http/http.dart';
+
 void main() async {
-  // get(Uri.parse('http://0.0.0.0:8080/api/v1/banner')).then((result) {
-  //   print(result.headers);
-  //   print(result.body);
-  // });
+  login();
+}
 
-  // get(Uri.parse('https://www.wanandroid.com/banner/json')).then((result) {
-  //   print(result.headers);
-  //   print(result.body);
-  // });
+void login() {
+  post(Uri.parse('http://0.0.0.0:8080/api/v1/user/login'),
+      body: jsonEncode({
+        "username": "admin",
+        "password": "123456",
+      })).then((result) {
+    print(result.body);
+  });
+}
 
-  // post(Uri.parse('http://0.0.0.0:8080/api/v1/user/login'),
-  //         body: jsonEncode({"username": "pgtwo", "password": "123456"}))
-  //     .then((result) {
-  //   print(result.headers);
-  //   print(result.body);
-  // });
+void userInfo() {
+  final token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIxMjM0NTYiLCJpYXQiOjE3MjQyMzIwNTMsImV4cCI6MTcyNjgyNDA1M30.L_0nLK24X5q78rMs0ZzgeIv0UrK0Gft-YRtDBgSc0Kg";
 
-  // post(Uri.parse('http://0.0.0.0:8080/api/v1/user/register'),
-  //     body: jsonEncode({
-  //       "username": "pgtwo",
-  //       "password": "123456",
-  //       "rePassword": "123456"
-  //     })).then((result) {
-  //   print(result.body);
-  // });
-
-  // post(Uri.parse('http://0.0.0.0:8080/api/v1/search/0'),
-  //     body: jsonEncode({"query": "Android"})).then((result) {
-  //   print(result.body);
-  // });
+  post(Uri.parse('http://0.0.0.0:8080/api/v1/user/info'),
+      body: jsonEncode({
+        "token": token,
+      })).then((result) {
+    print(result.body);
+  });
 }

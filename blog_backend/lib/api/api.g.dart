@@ -10,8 +10,13 @@ Router _$V1ApiRouter(V1Api service) {
   final router = Router();
   router.add(
     'POST',
-    r'/login',
+    r'/user/login',
     service.login,
+  );
+  router.add(
+    'POST',
+    r'/user/info',
+    service.fetchUserInfo,
   );
   return router;
 }
