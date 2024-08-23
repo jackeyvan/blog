@@ -10,21 +10,20 @@ class RootPage extends BasePage<RootController> {
 
   @override
   Widget buildPage(BuildContext context) {
-    final leftSides = controller.buildLeftSides();
-    return Row(
-      children: [buildMenuDrawer(leftSides), buildBody()],
-    );
+    return Row(children: [
+      buildDrawerMenu(controller.buildLeftSides()),
+      Expanded(child: buildBody())
+    ]);
   }
 
-  Widget buildItem(DrawerModel model) {
-    /// 没有子菜单
+  Widget buildDrawItem(DrawerModel model) {
     final menu = model.menus;
     if (menu != null && menu.isNotEmpty) {
       return ExpansionTile(
           childrenPadding: const EdgeInsets.only(left: 12),
           title: Text(model.name),
           leading: model.leading,
-          children: menu.map(buildItem).toList());
+          children: menu.map(buildDrawItem).toList());
     }
     return ListTile(
         title: Text(model.name),
@@ -33,26 +32,28 @@ class RootPage extends BasePage<RootController> {
         trailing: model.trailing);
   }
 
-  buildMenuDrawer(List<DrawerModel> leftSides) {
+  buildDrawerMenu(List<DrawerModel> leftSides) {
     return Drawer(
       child: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 18),
           shrinkWrap: true,
-          itemBuilder: (context, index) => buildItem(leftSides[index]),
+          itemBuilder: (context, index) => buildDrawItem(leftSides[index]),
           itemCount: leftSides.length),
     );
   }
 
   buildBody() {
-    return Obx(() {
-      switch (controller.currentType.value) {
-        case 1:
-          return keepWidgetAlive(BookPage());
+    return Scaffold(
+        appBar: AppBar(title: Text("首页"), centerTitle: false),
+        body: Obx(() {
+          switch (controller.currentType.value) {
+            case 1:
+              return keepWidgetAlive(BookPage());
 
-        default:
-          return Center(child: Text("首页"));
-      }
-    });
+            default:
+              return Center(child: Text("首页"));
+          }
+        }));
   }
 }
 

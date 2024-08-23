@@ -5,6 +5,6 @@ import 'package:flutter/material.dart';
 class BookPage extends BasePage {
   @override
   Widget buildPage(BuildContext context) {
-    return Text("书签页面");
+    return Padding(padding: EdgeInsets.all(36), child: Text("书签页面"));
   }
 }
