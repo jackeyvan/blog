@@ -1,6 +1,7 @@
 import 'package:blog_admin/app/modules/pages/home_page.dart';
-import 'package:blog_admin/app/modules/pages/login_page.dart';
 import 'package:blog_admin/app/modules/pages/root_page.dart';
+import 'package:blog_admin/app/modules/pages/user/login_middleware.dart';
+import 'package:blog_admin/app/modules/pages/user/login_page.dart';
 import 'package:blog_admin/app/modules/test/test_page.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +21,11 @@ class Routes {
   static const login = _Paths.login;
 
   static final routes = [
-    GetPage(name: root, page: () => const RootPage(), binding: RootBinding()),
+    GetPage(
+        name: root,
+        page: () => const RootPage(),
+        binding: RootBinding(),
+        middlewares: [LoginMiddleware()]),
     GetPage(name: home, page: () => const HomePage()),
     GetPage(name: test, page: () => const TestPage()),
     GetPage(
