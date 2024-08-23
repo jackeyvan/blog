@@ -1,22 +1,43 @@
+import 'package:blog_admin/app/api/admin_repository.dart';
 import 'package:blog_admin/core/net/api_error.dart';
 import 'package:blog_admin/core/net/base_api.dart';
 import 'package:dio/dio.dart';
 
 class AdminApi extends BaseApi {
   @override
-  void init(Dio dio) {}
+  void init(Dio dio) {
+    BaseOptions options = BaseOptions();
+
+    options.baseUrl = AdminApiPaths.baseUrl;
+
+    dio.options = options;
+  }
 
   @override
-  T? convert<T>(json) {
+  T? convert<T>(dynamic json) {
     try {
-      if (json.code == 200) {
-        return json.data;
-      } else {
-        throw ApiError(message: json.msg, code: json.code);
+      if (json != null) {
+        final result = AdminResponse.fromJson(json);
+        if (result.code == 200) {
+          return result.data;
+        }
+        throw ApiError(message: result.msg, code: result.code);
       }
+      throw ApiError();
     } catch (e) {
       if (e is ApiError) rethrow;
       throw ApiError(message: ApiError.parseError);
     }
+  }
+}
+
+class AdminResponse extends BaseResponse {
+  @override
+  bool get success => code == 200;
+
+  AdminResponse.fromJson(dynamic json) {
+    code = json["code"];
+    msg = json["message"];
+    data = json["data"];
   }
 }

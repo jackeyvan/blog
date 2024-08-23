@@ -1,8 +1,7 @@
-import 'package:blog_admin/app/modules/pages/home_page.dart';
-import 'package:blog_admin/app/modules/pages/root_page.dart';
-import 'package:blog_admin/app/modules/pages/user/login_middleware.dart';
-import 'package:blog_admin/app/modules/pages/user/login_page.dart';
-import 'package:blog_admin/app/modules/test/test_page.dart';
+import 'package:blog_admin/app/pages/home_page.dart';
+import 'package:blog_admin/app/pages/root_page.dart';
+import 'package:blog_admin/app/pages/user/login_middleware.dart';
+import 'package:blog_admin/app/pages/user/login_page.dart';
 import 'package:get/get.dart';
 
 abstract class _Paths {
@@ -27,7 +26,7 @@ class Routes {
         binding: RootBinding(),
         middlewares: [LoginMiddleware()]),
     GetPage(name: home, page: () => const HomePage()),
-    GetPage(name: test, page: () => const TestPage()),
+    // GetPage(name: test, page: () => const TestPage()),
     GetPage(
         name: login, page: () => const LoginPage(), binding: LoginBinding()),
   ];

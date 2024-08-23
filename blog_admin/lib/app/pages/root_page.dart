@@ -1,5 +1,5 @@
-import 'package:blog_admin/app/modules/model/left_menu_model.dart';
-import 'package:blog_admin/app/modules/pages/book_page.dart';
+import 'package:blog_admin/app/model/drawer_model.dart';
+import 'package:blog_admin/app/pages/book_page.dart';
 import 'package:blog_admin/core/page/base/base_controller.dart';
 import 'package:blog_admin/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +11,12 @@ class RootPage extends BasePage<RootController> {
   @override
   Widget buildPage(BuildContext context) {
     final leftSides = controller.buildLeftSides();
-    return Scaffold(
-        drawer: buildMenuDrawer(leftSides),
-        body: Row(
-          children: [buildMenuDrawer(leftSides), buildBody()],
-        ));
+    return Row(
+      children: [buildMenuDrawer(leftSides), buildBody()],
+    );
   }
 
-  Widget buildItem(LeftMenuModel model) {
+  Widget buildItem(DrawerModel model) {
     /// 没有子菜单
     final menu = model.menus;
     if (menu != null && menu.isNotEmpty) {
@@ -35,7 +33,7 @@ class RootPage extends BasePage<RootController> {
         trailing: model.trailing);
   }
 
-  buildMenuDrawer(List<LeftMenuModel> leftSides) {
+  buildMenuDrawer(List<DrawerModel> leftSides) {
     return Drawer(
       child: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 18),
@@ -61,27 +59,26 @@ class RootPage extends BasePage<RootController> {
 class RootController extends BaseController {
   final currentType = 0.obs;
 
-  List<LeftMenuModel> buildLeftSides() {
+  List<DrawerModel> buildLeftSides() {
     return [
-      LeftMenuModel(
+      DrawerModel(
           name: "博客管理后台", leading: const Icon(Icons.flutter_dash_outlined)),
-      LeftMenuModel(name: "首页", leading: const Icon(Icons.home)),
-      LeftMenuModel(
+      DrawerModel(name: "首页", leading: const Icon(Icons.home)),
+      DrawerModel(
           name: "书签管理",
           leading: const Icon(Icons.bookmark_add_outlined),
-          trailing: const Icon(Icons.arrow_drop_down_outlined),
           type: 1),
-      LeftMenuModel(
+      DrawerModel(
           name: "博客管理",
           leading: const Icon(Icons.bookmark_add_outlined),
           trailing: const Icon(Icons.arrow_drop_down_outlined),
           menus: [
-            LeftMenuModel(
+            DrawerModel(
                 name: "博客列表",
                 leading: const Icon(Icons.list),
                 isSub: true,
                 type: 2),
-            LeftMenuModel(
+            DrawerModel(
                 name: "添加博客",
                 leading: const Icon(Icons.add),
                 isSub: true,

@@ -1,4 +1,6 @@
+import 'package:blog_admin/core/init/init_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart' as f_toast;
 import 'package:get/get.dart';
 
 /// 封装顶级弹窗工具类
@@ -58,16 +60,16 @@ class OverlayUtils {
   }
 
   /// 吐司
-  // static showToast(String? msg) {
-  //   if (isNotNullOrBlank(msg)) {
-  //     f_toast.Fluttertoast.showToast(
-  //         msg: msg!,
-  //         timeInSecForIosWeb: 1,
-  //         toastLength: f_toast.Toast.LENGTH_SHORT,
-  //         gravity: f_toast.ToastGravity.CENTER,
-  //         fontSize: 16.0);
-  //   }
-  // }
+  static showToast(String? msg) {
+    if (isNotNullOrBlank(msg)) {
+      f_toast.Fluttertoast.showToast(
+          msg: msg!,
+          timeInSecForIosWeb: 1,
+          toastLength: f_toast.Toast.LENGTH_SHORT,
+          gravity: f_toast.ToastGravity.CENTER,
+          fontSize: 16.0);
+    }
+  }
   //
   // /// SnackBar
   // static showSnackBar(String? msg) {

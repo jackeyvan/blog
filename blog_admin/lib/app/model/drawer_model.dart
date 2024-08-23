@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
-class LeftMenuModel {
+class DrawerModel {
   final String name;
   final Icon leading;
   final Icon? trailing;
   final int? type;
   bool isSub;
-  final List<LeftMenuModel>? menus;
+  final List<DrawerModel>? menus;
 
-  LeftMenuModel(
+  DrawerModel(
       {required this.name,
       required this.leading,
       this.type,

@@ -1,7 +1,11 @@
 import 'dart:ui';
 
+import 'package:blog_admin/app/api/admin_repository.dart';
+import 'package:blog_admin/app/routes/routes.dart';
 import 'package:blog_admin/core/page/base/base_controller.dart';
 import 'package:blog_admin/core/page/base/base_page.dart';
+import 'package:blog_admin/core/utils/core_utils.dart';
+import 'package:blog_admin/core/utils/overlay_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -66,20 +70,20 @@ class LoginController extends BaseController {
     final account = accountController.text;
     final password = passwordController.text;
 
-    // if (CoreUtils.isNullOrBlank(account) || CoreUtils.isNullOrBlank(password)) {
-    //   OverlayUtils.showToast("账号或密码为空");
-    //   return;
-    // }
+    if (CoreUtils.isNullOrBlank(account) || CoreUtils.isNullOrBlank(password)) {
+      OverlayUtils.showToast("账号或密码为空");
+      return;
+    }
 
-    // AdminRepository.login(account, password).then((user) {
-    //   if (user != null) {
-    //     OverlayUtils.showToast("登录成功");
-    //     Get.toNamed(Routes.root);
-    //   } else {
-    //     OverlayUtils.showToast("登录失败，请重试");
-    //   }
-    // }).catchError((e, s) {
-    //   OverlayUtils.showToast(e.toString());
-    // });
+    AdminRepository.login(account, password).then((user) {
+      if (user != null) {
+        OverlayUtils.showToast("登录成功");
+        Get.toNamed(Routes.root);
+      } else {
+        OverlayUtils.showToast("登录失败，请重试");
+      }
+    }).catchError((e, s) {
+      OverlayUtils.showToast(e.toString());
+    });
   }
 }
