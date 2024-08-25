@@ -1,9 +1,8 @@
 import 'package:blog_admin/app/model/drawer_model.dart';
 import 'package:blog_admin/app/pages/book_page.dart';
-import 'package:blog_admin/core/page/base/base_controller.dart';
-import 'package:blog_admin/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_core/get_core.dart';
 
 class RootPage extends BasePage<RootController> {
   const RootPage({super.key});

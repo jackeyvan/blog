@@ -1,5 +1,5 @@
-import 'package:blog_flutter/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get_core/get_core.dart';
 
 class RootPage extends BasePage {
   const RootPage({super.key});

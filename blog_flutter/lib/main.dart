@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_core/get_core.dart';
 
 import 'app/routes/routes.dart';
 import 'app/service/background_service.dart';
-import 'core/init/themes.dart';
 
 void main() async {
   await Get.putAsync(() => BackgroundService().dependencies());

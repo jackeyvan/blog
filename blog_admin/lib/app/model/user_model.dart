@@ -1,4 +1,4 @@
-import 'package:blog_admin/core/init/storage.dart';
+import 'package:get_core/get_core.dart';
 
 class User {
   static const keyUser = "keyUser";

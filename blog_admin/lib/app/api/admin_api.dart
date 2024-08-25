@@ -1,7 +1,6 @@
 import 'package:blog_admin/app/api/admin_repository.dart';
-import 'package:blog_admin/core/net/api_error.dart';
-import 'package:blog_admin/core/net/base_api.dart';
 import 'package:dio/dio.dart';
+import 'package:get_core/get_core.dart';
 
 class AdminApi extends BaseApi {
   @override

@@ -1,5 +1,5 @@
-import 'package:blog_admin/core/page/base/base_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get_core/get_core.dart';
 
 /// 书签页面
 class BookPage extends BasePage {

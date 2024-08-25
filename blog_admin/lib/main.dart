@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_core/get_core.dart';
 
 import 'app/routes/routes.dart';
 import 'app/service/background_service.dart';
-import 'core/init/themes.dart';
 
 /// 博客网站管理后台
 void main() async {

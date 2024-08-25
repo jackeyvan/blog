@@ -1,5 +1,4 @@
-import 'package:get_core/src/core/init.dart';
-import 'package:get_core/src/core/storage.dart';
+import 'package:get_core/get_core.dart';
 
 enum CacheMode {
   /// 只使用本地缓存，没有缓存返回null
@@ -58,6 +57,6 @@ class Cache {
         path += "$key=$value";
       });
     }
-    return md5(path);
+    return CoreUtils.md5(path);
   }
 }

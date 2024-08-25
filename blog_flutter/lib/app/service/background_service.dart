@@ -1,4 +1,4 @@
-import 'package:blog_flutter/core/init/init_service.dart';
+import 'package:get_core/get_core.dart';
 
 class BackgroundService extends CoreService {
   @override

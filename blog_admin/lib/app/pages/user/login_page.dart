@@ -2,12 +2,9 @@ import 'dart:ui';
 
 import 'package:blog_admin/app/api/admin_repository.dart';
 import 'package:blog_admin/app/routes/routes.dart';
-import 'package:blog_admin/core/page/base/base_controller.dart';
-import 'package:blog_admin/core/page/base/base_page.dart';
-import 'package:blog_admin/core/utils/core_utils.dart';
-import 'package:blog_admin/core/utils/overlay_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_core/get_core.dart';
 
 class LoginBinding extends Bindings {
   @override
