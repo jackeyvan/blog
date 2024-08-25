@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:get_core/src/init/build_env.dart';
-import 'package:get_core/src/init/storage.dart';
-import 'package:get_core/src/init/themes.dart';
+import 'package:get_core/src/core/build_env.dart';
+import 'package:get_core/src/core/storage.dart';
+import 'package:get_core/src/core/themes.dart';
 import 'package:get_core/src/utils/log_utils.dart';
 import 'package:logger/logger.dart';
 

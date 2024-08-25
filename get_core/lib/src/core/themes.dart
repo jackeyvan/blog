@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_core/src/init/storage.dart';
+import 'package:get_core/src/core/storage.dart';
 
 class AppTheme {
   static const _themeKey = "themeKey";

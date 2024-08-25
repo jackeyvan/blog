@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
+import 'package:get_core/src/core/build_env.dart';
 import 'package:logger/logger.dart';
-
-import '../init/build_env.dart';
 
 class LogUtils {
   static final _logger = Get.find<Logger>();

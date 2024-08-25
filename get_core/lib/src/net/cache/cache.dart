@@ -1,5 +1,5 @@
-import 'package:get_core/src/init/init_core.dart';
-import 'package:get_core/src/init/storage.dart';
+import 'package:get_core/src/core/init_core.dart';
+import 'package:get_core/src/core/storage.dart';
 
 enum CacheMode {
   /// 只使用本地缓存，没有缓存返回null
