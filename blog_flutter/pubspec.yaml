@@ -13,14 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.5
-
   get: ^4.6.6
-  get_storage: ^2.1.1
-
   get_core:
     path: ../get_core
-
 
   cached_network_image: ^3.3.1
 
