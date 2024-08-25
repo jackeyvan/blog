@@ -1,4 +1,4 @@
-import 'package:get_core/src/core/init_core.dart';
+import 'package:get_core/src/core/init.dart';
 import 'package:get_core/src/core/storage.dart';
 
 enum CacheMode {
