@@ -1,6 +1,6 @@
 import 'package:bolg_backend/const/environment.dart';
 import 'package:bolg_backend/db/hive_box.dart';
-import 'package:bolg_backend/model/user_model.dart';
+import 'package:bolg_backend/model/user.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class Utils {
@@ -28,7 +28,7 @@ class Utils {
   }
 
   /// Get user form token
-  static UserModel? getUserFromToken(String token) {
+  static User? getUserFromToken(String token) {
     return HiveBox.userBox.get(JWT.decode(token).payload["username"]);
   }
 }

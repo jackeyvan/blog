@@ -7,6 +7,6 @@ class Constant {
 
   static final failMsg = "请求失败";
   static final userAlreadyHed = "用户已存在";
-  static final userDontHave = "用户不存在";
+  static final userPasswordWrong = "账号或密码错误";
   static final tokenExpired = "用户Token过期";
 }

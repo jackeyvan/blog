@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:bolg_backend/api/base_api.dart';
 import 'package:bolg_backend/const/constant.dart';
 import 'package:bolg_backend/db/hive_box.dart';
-import 'package:bolg_backend/model/user_model.dart';
 import 'package:bolg_backend/utils/utils.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -15,26 +14,25 @@ part 'api.g.dart';
 /// 如果本地和三方都失败，则使用成功状态，但是body没有数据
 
 class V1Api extends BaseApi {
+  Router get router => _$V1ApiRouter(this);
+
   @Route.post('/user/login')
   Future<Response> login(Request request) async {
     final params = jsonDecode(await request.readAsString());
     final username = params["username"];
     final password = params["password"];
 
-    /// 检查用户是否已经注册
-    if (!HiveBox.userBox.containsKey(username)) {
-      return failed(message: Constant.userDontHave);
+    /// 检查用户状态
+    final dbUser = HiveBox.userBox.get(username);
+    if (dbUser == null || dbUser.password != password) {
+      return failed(message: Constant.userPasswordWrong);
     }
 
-    final user = UserModel(
-        nickname: username,
-        username: username,
-        password: password,
-        token: Utils.jwtSign(username, password));
+    /// 更新token
+    dbUser.token = Utils.jwtSign(username, password);
+    HiveBox.userBox.put(username, dbUser);
 
-    await HiveBox.userBox.put(username, user);
-
-    return success(user);
+    return success(dbUser);
   }
 
   @Route.post('/user/info')
@@ -50,5 +48,11 @@ class V1Api extends BaseApi {
     return failed(message: Constant.tokenExpired);
   }
 
-  Router get router => _$V1ApiRouter(this);
+  @Route.post('/bookmark/tabs/add')
+  Future<Response> addBookmarkTab(Request request) async {
+    final params = jsonDecode(await request.readAsString());
+    final token = params["name"];
+    if (Utils.jwtVerify(token)) {}
+    return failed(message: Constant.tokenExpired);
+  }
 }

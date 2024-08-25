@@ -75,7 +75,7 @@ class LoginController extends BaseController {
     AdminRepository.login(account, password).then((user) {
       if (user != null) {
         OverlayUtils.showToast("登录成功");
-        Get.toNamed(Routes.root);
+        Get.offNamed(Routes.home);
       } else {
         OverlayUtils.showToast("登录失败，请重试");
       }

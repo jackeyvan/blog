@@ -14,6 +14,7 @@ class AdminApi extends BaseApi {
 
   @override
   T? convert<T>(dynamic json) {
+    print(json);
     try {
       if (json != null) {
         final result = AdminResponse.fromJson(json);

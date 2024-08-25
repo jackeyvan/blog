@@ -18,5 +18,10 @@ Router _$V1ApiRouter(V1Api service) {
     r'/user/info',
     service.fetchUserInfo,
   );
+  router.add(
+    'POST',
+    r'/bookmark/tabs/add',
+    service.addBookmarkTab,
+  );
   return router;
 }

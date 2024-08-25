@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bolg_backend/db/hive_box.dart';
-import 'package:bolg_backend/model/user_model.dart';
+import 'package:bolg_backend/model/user.dart';
 import 'package:bolg_backend/utils/utils.dart';
 
 class Schedule {
@@ -19,7 +19,7 @@ class Schedule {
     if (!HiveBox.userBox.containsKey(username)) {
       await HiveBox.userBox.put(
           username,
-          UserModel(
+          User(
               username: username,
               password: password,
               token: Utils.jwtSign(username, password)));

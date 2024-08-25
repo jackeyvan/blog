@@ -1,25 +1,25 @@
 import 'package:hive/hive.dart';
 
-part 'user_model.g.dart';
+part 'user.g.dart';
 
 @HiveType(typeId: 1)
-class UserModel {
+class User {
   @HiveField(0)
-  final String username;
+  String username;
 
   @HiveField(1)
-  final String? password;
+  String? password;
 
   @HiveField(2)
-  final String? nickname;
+  String? nickname;
 
   @HiveField(3)
-  final String? avatar;
+  String? avatar;
 
   @HiveField(4)
-  final String token;
+  String token;
 
-  UserModel(
+  User(
       {required this.username,
       this.nickname,
       this.password,

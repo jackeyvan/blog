@@ -8,6 +8,8 @@ export "package:get_core/src/net/api_error.dart";
 export "package:get_core/src/net/base_api.dart";
 export "package:get_core/src/page/base/base_controller.dart";
 export "package:get_core/src/page/base/base_page.dart";
+export "package:get_core/src/page/refresh/refresh_controller.dart";
+export "package:get_core/src/page/refresh/refresh_page.dart";
 export "package:get_core/src/utils/core_utils.dart";
 export "package:get_core/src/utils/log_utils.dart";
 export "package:get_core/src/utils/overlay_utils.dart";
