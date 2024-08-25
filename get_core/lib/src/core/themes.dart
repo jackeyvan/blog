@@ -229,10 +229,3 @@ class ThemeModel {
     this.icon,
   });
 }
-
-// static ThemeData _yellow() {
-//   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-//     statusBarColor: Colors.yellow.shade700, // status bar color
-//     statusBarBrightness: Brightness.dark, //status bar brigtness
-//     statusBarIconBrightness: Brightness.dark, //status barIcon Brightness
-//   ));
