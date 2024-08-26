@@ -1,10 +1,13 @@
 import 'package:blog_admin/app/api/admin_repository.dart';
 import 'package:blog_admin/app/model/blog_model.dart';
+import 'package:blog_admin/app/pages/blog/add_blog_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 
 class BlogController extends BaseController<List<BlogModel>> {
+  final isBlogPage = true.obs;
+
   @override
   void onReady() {
     AdminRepository.fetchBlogs().then((value) {
@@ -20,11 +23,20 @@ class BlogPage extends BasePage<BlogController> {
 
   @override
   Widget buildPage(BuildContext context) {
+    return Obx(() => controller.isBlogPage.value
+        ? buildBlogPage()
+        : AddBlogPage(controller));
+  }
+
+  /// 博客列表页
+  buildBlogPage() {
     return Column(children: [
       Padding(
           padding: EdgeInsets.all(12),
           child: Row(children: [
-            TextButton(onPressed: () {}, child: Text("添加博客")),
+            TextButton(
+                onPressed: () => controller.isBlogPage.value = false,
+                child: Text("添加博客")),
           ])),
       Expanded(child: buildObx(builder: () {
         return ListView.builder(

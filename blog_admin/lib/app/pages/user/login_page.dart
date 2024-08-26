@@ -26,7 +26,7 @@ class LoginPage extends BasePage<LoginController> {
         constraints: constraints,
         alignment: Alignment.center,
         child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.2,
+            width: MediaQuery.of(context).size.width * 0.3,
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
               child: Card(
