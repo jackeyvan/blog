@@ -20,8 +20,38 @@ Router _$V1ApiRouter(V1Api service) {
   );
   router.add(
     'POST',
-    r'/bookmark/tabs/add',
-    service.addBookmarkTab,
+    r'/bookmark/tabs',
+    service.fetchBookmarkTabs,
+  );
+  router.add(
+    'POST',
+    r'/bookmark/add',
+    service.addBookmark,
+  );
+  router.add(
+    'POST',
+    r'/bookmark/list',
+    service.fetchBookmarks,
+  );
+  router.add(
+    'POST',
+    r'/blog/list',
+    service.fetchBlogs,
+  );
+  router.add(
+    'POST',
+    r'/blog/add',
+    service.addBlogs,
+  );
+  router.add(
+    'POST',
+    r'/blog/tags',
+    service.fetchBlogTags,
+  );
+  router.add(
+    'POST',
+    r'/blog/category',
+    service.fetchBlogCategory,
   );
   return router;
 }

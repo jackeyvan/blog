@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 
+import '../blog/blog_page.dart';
+
 class HomePage extends BasePage<RootController> {
   const HomePage({super.key});
 
@@ -44,16 +46,18 @@ class HomePage extends BasePage<RootController> {
   buildBody() {
     return Scaffold(
         appBar: AppBar(
-            title: Text("首页"),
+            title: Text("博客管理后台"),
             centerTitle: false,
             automaticallyImplyLeading: false),
         body: Obx(() {
           switch (controller.currentType.value) {
             case 1:
               return keepWidgetAlive(BookPage());
+            case 2:
+              return keepWidgetAlive(BlogPage());
 
             default:
-              return Center(child: Text("首页"));
+              return Center(child: Text("博客管理后台"));
           }
         }));
   }
@@ -66,27 +70,35 @@ class RootController extends BaseController {
     return [
       DrawerModel(
           name: "博客管理后台", leading: const Icon(Icons.flutter_dash_outlined)),
-      DrawerModel(name: "首页", leading: const Icon(Icons.home)),
+      // DrawerModel(name: "首页", leading: const Icon(Icons.home)),
       DrawerModel(
           name: "书签管理",
           leading: const Icon(Icons.bookmark_add_outlined),
           type: 1),
+
       DrawerModel(
-          name: "博客管理",
-          leading: const Icon(Icons.bookmark_add_outlined),
-          trailing: const Icon(Icons.arrow_drop_down_outlined),
-          menus: [
-            DrawerModel(
-                name: "博客列表",
-                leading: const Icon(Icons.list),
-                isSub: true,
-                type: 2),
-            DrawerModel(
-                name: "添加博客",
-                leading: const Icon(Icons.add),
-                isSub: true,
-                type: 3),
-          ]),
+        name: "博客管理",
+        leading: const Icon(Icons.bookmark_add_outlined),
+        type: 2,
+      ),
+
+      // DrawerModel(
+      //   name: "博客管理",
+      //   leading: const Icon(Icons.bookmark_add_outlined),
+      //   trailing: const Icon(Icons.arrow_drop_down_outlined),
+      //   menus: [
+      //     DrawerModel(
+      //         name: "博客列表",
+      //         leading: const Icon(Icons.list),
+      //         isSub: true,
+      //         type: 2),
+      //     DrawerModel(
+      //         name: "添加博客",
+      //         leading: const Icon(Icons.add),
+      //         isSub: true,
+      //         type: 3),
+      //   ],
+      // ),
     ];
   }
 }

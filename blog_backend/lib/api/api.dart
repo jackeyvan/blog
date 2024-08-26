@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:bolg_backend/api/base_api.dart';
 import 'package:bolg_backend/const/constant.dart';
 import 'package:bolg_backend/db/hive_box.dart';
+import 'package:bolg_backend/model/blog.dart';
+import 'package:bolg_backend/model/bookmark.dart';
 import 'package:bolg_backend/utils/utils.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
@@ -48,11 +50,47 @@ class V1Api extends BaseApi {
     return failed(message: Constant.tokenExpired);
   }
 
-  @Route.post('/bookmark/tabs/add')
-  Future<Response> addBookmarkTab(Request request) async {
+  @Route.post('/bookmark/tabs')
+  Future<Response> fetchBookmarkTabs(Request request) async {
+    return success(HiveBox.bookmarkTypeBox.values.toList());
+  }
+
+  @Route.post('/bookmark/add')
+  Future<Response> addBookmark(Request request) async {
     final params = jsonDecode(await request.readAsString());
-    final token = params["name"];
-    if (Utils.jwtVerify(token)) {}
-    return failed(message: Constant.tokenExpired);
+    final bookmark = Bookmark.fromJson(params);
+    await HiveBox.bookmarkBox.add(bookmark);
+    return success(bookmark);
+  }
+
+  @Route.post('/bookmark/list')
+  Future<Response> fetchBookmarks(Request request) async {
+    return success(HiveBox.bookmarkBox.values.toList());
+  }
+
+  @Route.post('/blog/list')
+  Future<Response> fetchBlogs(Request request) async {
+    return success(HiveBox.blogBox.values.toList());
+  }
+
+  @Route.post('/blog/add')
+  Future<Response> addBlogs(Request request) async {
+    final params = jsonDecode(await request.readAsString());
+    final blog = Blog.fromJson(params);
+
+    blog.saveTagAndCategory();
+
+    await HiveBox.blogBox.add(blog);
+    return success(blog);
+  }
+
+  @Route.post('/blog/tags')
+  Future<Response> fetchBlogTags(Request request) async {
+    return success(HiveBox.blogTagBox.values.toList());
+  }
+
+  @Route.post('/blog/category')
+  Future<Response> fetchBlogCategory(Request request) async {
+    return success(HiveBox.blogCategoryBox.values.toList());
   }
 }

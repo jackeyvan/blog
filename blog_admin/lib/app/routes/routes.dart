@@ -1,4 +1,4 @@
-import 'package:blog_admin/app/pages/home_page.dart';
+import 'package:blog_admin/app/pages/home/home_page.dart';
 import 'package:blog_admin/app/pages/user/login_middleware.dart';
 import 'package:blog_admin/app/pages/user/login_page.dart';
 import 'package:get/get.dart';

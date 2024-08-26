@@ -49,4 +49,13 @@ class Bookmark {
       "logo": logo,
     };
   }
+
+  factory Bookmark.fromJson(dynamic json) {
+    return Bookmark(
+        name: json["name"],
+        link: json["link"],
+        id: json["id"],
+        logo: json["logo"],
+        desc: json["desc"]);
+  }
 }

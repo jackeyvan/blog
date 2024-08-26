@@ -3,7 +3,32 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 void main() async {
-  login();
+  // login();
+  // bookmark();
+  blog();
+}
+
+void blog() {
+  post(Uri.parse('http://0.0.0.0:8080/api/v1/blog/add'),
+      body: jsonEncode({
+        "title": "我是博客标题",
+        "content": "我是博客内容",
+        "category": "科技",
+        "publishDate": 1000,
+        "tags": ["标签1", "标签2"],
+      })).then((result) {
+    print(result.body);
+  });
+
+  post(Uri.parse('http://0.0.0.0:8080/api/v1/blog/list')).then((result) {
+    print(result.body);
+  });
+}
+
+void bookmark() {
+  post(Uri.parse('http://0.0.0.0:8080/api/v1/bookmark/tabs')).then((result) {
+    print(result.body);
+  });
 }
 
 void login() {
