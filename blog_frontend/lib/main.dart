@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 
-import 'app/routes/routes.dart';
-import 'app/service/background_service.dart';
+import 'routes/routes.dart';
+import 'service/background_service.dart';
 
 void main() async {
-  await Get.putAsync(() => BackgroundService().dependencies());
+  await BackgroundService().dependencies();
 
   runApp(const BlogApp());
 }
@@ -17,8 +17,7 @@ class BlogApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: Routes.root,
-      // initialBinding: BlogBindings(),
+      initialRoute: Routes.home,
       debugShowCheckedModeBanner: false,
       getPages: Routes.routes,
       theme: AppTheme.light,
