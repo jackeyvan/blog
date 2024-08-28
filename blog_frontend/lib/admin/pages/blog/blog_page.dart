@@ -1,6 +1,6 @@
 import 'package:blog_frontend/admin/model/blog_model.dart';
 import 'package:blog_frontend/admin/pages/blog/add_blog_page.dart';
-import 'package:blog_frontend/api/admin_repository.dart';
+import 'package:blog_frontend/api/blog_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
@@ -10,7 +10,7 @@ class BlogController extends BaseController<List<BlogModel>> {
 
   @override
   void onReady() {
-    AdminRepository.fetchBlogs().then((value) {
+    BlogRepository.fetchBlogs().then((value) {
       data = value;
       showSuccessPage();
     });

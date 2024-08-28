@@ -12,20 +12,21 @@ class CacheInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     var cacheMode = options.extra['cacheMode'];
-    final key = Cache.cacheKey(options.path, params: options.queryParameters);
+    final key =
+        CacheUtils.cacheKey(options.path, params: options.queryParameters);
     options.extra.addAll({"cacheKey": key});
 
     /// 设置默认的数据
     cacheMode ??= defaultCacheMode;
     if (cacheMode == CacheMode.cacheFirstThenRemote) {
-      final json = Cache.readCache(key);
+      final json = CacheUtils.readCache(key);
 
       /// 缓存不为空才返回，缓存没有的话继续请求
       if (json != null) {
         return handler.resolve(Response(
           statusCode: 200,
           data: json,
-          statusMessage: Cache.cacheSuccess,
+          statusMessage: CacheUtils.cacheSuccess,
           requestOptions: RequestOptions(),
         ));
       }
@@ -34,11 +35,12 @@ class CacheInterceptor extends Interceptor {
     if (cacheMode == CacheMode.cacheOnly) {
       /// 只读取缓存数据，不请求网络数据
       /// 无论是否有缓存，都直接返回
-      final json = Cache.readCache(key);
+      final json = CacheUtils.readCache(key);
       return handler.resolve(Response(
         statusCode: 200,
         data: json,
-        statusMessage: json != null ? Cache.cacheSuccess : Cache.cacheError,
+        statusMessage:
+            json != null ? CacheUtils.cacheSuccess : CacheUtils.cacheError,
         requestOptions: RequestOptions(),
       ));
     }
@@ -60,7 +62,7 @@ class CacheInterceptor extends Interceptor {
     /// 请求成功，并且数据正常
     if (response.statusCode == 200 && json != null) {
       /// 保存缓存到本地
-      Cache.writeCache(cacheKey ?? '', json, cacheExpire);
+      CacheUtils.writeCache(cacheKey ?? '', json, cacheExpire);
     }
     super.onResponse(response, handler);
   }
@@ -73,13 +75,13 @@ class CacheInterceptor extends Interceptor {
     /// 如果请求失败，则查找本地缓存
     if (cacheMode == CacheMode.remoteFirstThenCache.name) {
       final cacheKey = extra['cacheKey'];
-      final json = Cache.readCache(cacheKey);
+      final json = CacheUtils.readCache(cacheKey);
 
       if (json != null) {
         handler.resolve(Response(
           statusCode: 200,
           data: json,
-          statusMessage: Cache.cacheSuccess,
+          statusMessage: CacheUtils.cacheSuccess,
           requestOptions: RequestOptions(),
         ));
         return;

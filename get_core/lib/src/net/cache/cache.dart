@@ -1,5 +1,12 @@
 import 'package:get_core/get_core.dart';
 
+class Cache {
+  CacheMode? mode;
+  Duration? expire;
+
+  Cache({this.mode, this.expire});
+}
+
 enum CacheMode {
   /// 只使用本地缓存，没有缓存返回null
   cacheOnly,
@@ -15,7 +22,7 @@ enum CacheMode {
   remoteFirstThenCache
 }
 
-class Cache {
+class CacheUtils {
   static const cacheSuccess = "获取缓存数据成功";
   static const cacheError = "获取缓存数据失败";
 

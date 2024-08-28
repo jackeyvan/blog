@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 
@@ -7,7 +8,7 @@ import 'service/background_service.dart';
 
 void main() async {
   await BackgroundService().dependencies();
-
+  usePathUrlStrategy();
   runApp(const BlogApp());
 }
 
@@ -17,7 +18,7 @@ class BlogApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: Routes.home,
+      initialRoute: Routes.admin,
       debugShowCheckedModeBanner: false,
       getPages: Routes.routes,
       theme: AppTheme.light,

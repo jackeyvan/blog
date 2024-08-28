@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:blog_frontend/api/admin_repository.dart';
+import 'package:blog_frontend/api/blog_repository.dart';
 import 'package:blog_frontend/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -72,7 +72,7 @@ class AdminLoginController extends BaseController {
       return;
     }
 
-    AdminRepository.login(account, password).then((user) {
+    BlogRepository.login(account, password).then((user) {
       if (user != null) {
         OverlayUtils.showToast("登录成功");
         Get.offNamed(Routes.admin);

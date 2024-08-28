@@ -4,6 +4,7 @@ class ApiError implements Exception {
 
   static const defaultError = "请求失败";
   static const parseError = "数据解析异常";
+  static const methodError = "未知的请求方法";
 
   /// 获取原始错误信息
   final String? origin;
