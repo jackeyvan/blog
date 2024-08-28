@@ -1,6 +1,6 @@
-import 'package:blog_frontend/admin/pages/home/home_page.dart';
-import 'package:blog_frontend/admin/pages/user/login_middleware.dart';
-import 'package:blog_frontend/admin/pages/user/login_page.dart';
+import 'package:blog_frontend/admin/home/home_page.dart';
+import 'package:blog_frontend/admin/user/login_middleware.dart';
+import 'package:blog_frontend/admin/user/login_page.dart';
 import 'package:blog_frontend/app/home_page.dart';
 import 'package:get/get.dart';
 

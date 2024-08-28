@@ -22,7 +22,7 @@ class BlogApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: Routes.routes,
       theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      darkTheme: AppTheme.light,
     );
   }
 }

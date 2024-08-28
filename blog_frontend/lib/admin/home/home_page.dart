@@ -1,6 +1,6 @@
-import 'package:blog_frontend/admin/model/drawer_model.dart';
-import 'package:blog_frontend/admin/pages/blog/blog_page.dart';
-import 'package:blog_frontend/admin/pages/book/book_page.dart';
+import 'package:blog_frontend/admin/blog/blog_page.dart';
+import 'package:blog_frontend/admin/book/book_page.dart';
+import 'package:blog_frontend/model/drawer_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
@@ -43,22 +43,17 @@ class AdminHomePage extends BasePage<RootController> {
   }
 
   buildBody() {
-    return Scaffold(
-        appBar: AppBar(
-            title: Text("博客管理后台"),
-            centerTitle: false,
-            automaticallyImplyLeading: false),
-        body: Obx(() {
-          switch (controller.currentType.value) {
-            case 1:
-              return keepWidgetAlive(BookPage());
-            case 2:
-              return keepWidgetAlive(BlogPage());
+    return Obx(() {
+      switch (controller.currentType.value) {
+        case 1:
+          return keepWidgetAlive(BookPage());
+        case 2:
+          return keepWidgetAlive(AdminBlogPage());
 
-            default:
-              return Center(child: Text("博客管理后台"));
-          }
-        }));
+        default:
+          return Center(child: Text("博客管理后台"));
+      }
+    });
   }
 }
 
@@ -77,7 +72,7 @@ class RootController extends BaseController {
 
       DrawerModel(
         name: "博客管理",
-        leading: const Icon(Icons.bookmark_add_outlined),
+        leading: const Icon(Icons.article_outlined),
         type: 2,
       ),
 

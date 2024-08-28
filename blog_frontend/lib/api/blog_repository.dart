@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:blog_frontend/admin/model/blog_model.dart';
-import 'package:blog_frontend/admin/model/user_model.dart';
+import 'package:blog_frontend/model/blog_model.dart';
+import 'package:blog_frontend/model/user_model.dart';
 import 'package:get/get.dart';
 
 import 'blog_api.dart';
@@ -12,7 +12,7 @@ class BlogApiPath {
 
   static const login = "$preFix/user/login";
   static const blogList = "$preFix/blog/list";
-  static const blogAdd = "$preFix/blog/add";
+  static const blogCreate = "$preFix/blog/create";
 }
 
 class BlogRepository {
@@ -25,11 +25,17 @@ class BlogRepository {
               "username": username,
               "password": password,
             }))
-        .then((json) => User.saveUser(User.fromJson(json)));
+        .then((data) => User.saveUser(User.fromJson(data)));
   }
 
   static Future<List<BlogModel>> fetchBlogs() {
     return _api.post(BlogApiPath.blogList).then(
         (e) => (e as List).map((json) => BlogModel.fromJson(json)).toList());
+  }
+
+  static Future<BlogModel> createBlog(BlogModel blog) {
+    return _api
+        .post(BlogApiPath.blogCreate, body: blog.toJson())
+        .then((data) => BlogModel.fromJson(data));
   }
 }

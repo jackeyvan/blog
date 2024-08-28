@@ -21,7 +21,7 @@ class BlogAdapter extends TypeAdapter<Blog> {
       content: fields[1] as String,
       category: fields[2] as String,
       tags: (fields[3] as List).cast<String>(),
-      publishDate: fields[4] as int,
+      publishDate: fields[4] as int?,
     );
   }
 

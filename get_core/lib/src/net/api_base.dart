@@ -56,9 +56,8 @@ abstract class BaseApi {
     dynamic body,
     Cache? cache,
   }) {
-    header = header ?? Map<String, dynamic>();
-
     if (cache != null) {
+      header = header ?? Map<String, dynamic>();
       header["cacheMode"] = cache.mode;
       header["cacheExpire"] = cache.expire?.inMilliseconds;
     }

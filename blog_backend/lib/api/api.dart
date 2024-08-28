@@ -55,8 +55,8 @@ class V1Api extends BaseApi {
     return success(HiveBox.bookmarkTypeBox.values.toList());
   }
 
-  @Route.post('/bookmark/add')
-  Future<Response> addBookmark(Request request) async {
+  @Route.post('/bookmark/create')
+  Future<Response> crateBookmark(Request request) async {
     final params = jsonDecode(await request.readAsString());
     final bookmark = Bookmark.fromJson(params);
     await HiveBox.bookmarkBox.add(bookmark);
@@ -73,14 +73,11 @@ class V1Api extends BaseApi {
     return success(HiveBox.blogBox.values.toList());
   }
 
-  @Route.post('/blog/add')
-  Future<Response> addBlogs(Request request) async {
+  @Route.post('/blog/create')
+  Future<Response> crateBlog(Request request) async {
     final params = jsonDecode(await request.readAsString());
     final blog = Blog.fromJson(params);
-
-    blog.saveTagAndCategory();
-
-    await HiveBox.blogBox.add(blog);
+    blog.id = await blog.save();
     return success(blog);
   }
 

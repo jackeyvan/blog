@@ -1,4 +1,4 @@
-import 'package:blog_frontend/admin/model/user_model.dart';
+import 'package:blog_frontend/model/user_model.dart';
 import 'package:blog_frontend/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';

@@ -25,8 +25,8 @@ Router _$V1ApiRouter(V1Api service) {
   );
   router.add(
     'POST',
-    r'/bookmark/add',
-    service.addBookmark,
+    r'/bookmark/create',
+    service.crateBookmark,
   );
   router.add(
     'POST',
@@ -40,8 +40,8 @@ Router _$V1ApiRouter(V1Api service) {
   );
   router.add(
     'POST',
-    r'/blog/add',
-    service.addBlogs,
+    r'/blog/create',
+    service.crateBlog,
   );
   router.add(
     'POST',
