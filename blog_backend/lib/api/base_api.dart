@@ -17,7 +17,7 @@ class BaseResponse {
 }
 
 class BaseApi {
-  success(dynamic data) {
+  success({dynamic data}) {
     return Response.ok(jsonEncode(BaseResponse(
         data: data, code: Constant.successCode, message: Constant.successMsg)));
   }

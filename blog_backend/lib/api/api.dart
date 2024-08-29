@@ -34,7 +34,7 @@ class V1Api extends BaseApi {
     dbUser.token = Utils.jwtSign(username, password);
     HiveBox.userBox.put(username, dbUser);
 
-    return success(dbUser);
+    return success(data: dbUser);
   }
 
   @Route.post('/user/info')
@@ -44,7 +44,7 @@ class V1Api extends BaseApi {
     if (Utils.jwtVerify(token)) {
       final user = Utils.getUserFromToken(token);
       if (user != null) {
-        return success(user);
+        return success(data: user);
       }
     }
     return failed(message: Constant.tokenExpired);
@@ -52,7 +52,7 @@ class V1Api extends BaseApi {
 
   @Route.post('/bookmark/tabs')
   Future<Response> fetchBookmarkTabs(Request request) async {
-    return success(HiveBox.bookmarkTypeBox.values.toList());
+    return success(data: HiveBox.bookmarkTypeBox.values.toList());
   }
 
   @Route.post('/bookmark/create')
@@ -60,34 +60,51 @@ class V1Api extends BaseApi {
     final params = jsonDecode(await request.readAsString());
     final bookmark = Bookmark.fromJson(params);
     await HiveBox.bookmarkBox.add(bookmark);
-    return success(bookmark);
+    return success(data: bookmark);
   }
 
   @Route.post('/bookmark/list')
   Future<Response> fetchBookmarks(Request request) async {
-    return success(HiveBox.bookmarkBox.values.toList());
+    return success(data: HiveBox.bookmarkBox.values.toList());
   }
 
   @Route.post('/blog/list')
   Future<Response> fetchBlogs(Request request) async {
-    return success(HiveBox.blogBox.values.toList());
+    return success(data: HiveBox.blogBox.values.toList());
   }
 
   @Route.post('/blog/create')
   Future<Response> crateBlog(Request request) async {
     final params = jsonDecode(await request.readAsString());
     final blog = Blog.fromJson(params);
-    blog.id = await blog.save();
-    return success(blog);
+    return success(data: await blog.save());
+  }
+
+  @Route.post('/blog/delete')
+  Future<Response> deleteBlog(Request request) async {
+    final params = jsonDecode(await request.readAsString());
+    final id = params["id"];
+    if (HiveBox.blogBox.containsKey(id)) {
+      await HiveBox.blogBox.delete(id);
+      return success();
+    }
+    return failed(message: Constant.blogDontHad);
+  }
+
+  @Route.post('/blog/update')
+  Future<Response> updateBlog(Request request) async {
+    final params = jsonDecode(await request.readAsString());
+    final blog = Blog.fromJson(params);
+    return success(data: await blog.save());
   }
 
   @Route.post('/blog/tags')
   Future<Response> fetchBlogTags(Request request) async {
-    return success(HiveBox.blogTagBox.values.toList());
+    return success(data: HiveBox.blogTagBox.values.toList());
   }
 
   @Route.post('/blog/category')
   Future<Response> fetchBlogCategory(Request request) async {
-    return success(HiveBox.blogCategoryBox.values.toList());
+    return success(data: HiveBox.blogCategoryBox.values.toList());
   }
 }

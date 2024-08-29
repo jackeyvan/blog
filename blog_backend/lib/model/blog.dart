@@ -8,7 +8,7 @@ class Blog {
   @HiveField(0)
   String title;
   @HiveField(1)
-  String content;
+  String? content;
   @HiveField(2)
   String category;
   @HiveField(3)
@@ -40,13 +40,15 @@ class Blog {
   factory Blog.fromJson(dynamic json) {
     return Blog(
       title: json["title"],
-      content: json["content"],
+      content: json["content"] as String?,
+      publishDate: json["publishDate"] as int?,
+      id: json["id"] as int?,
       category: json["category"],
       tags: (json["tags"] as List).map((e) => e as String).toList(),
     );
   }
 
-  Future<int> save() {
+  Future<Blog> save() async {
     HiveBox.blogCategoryBox.put(category, category);
 
     tags.forEach((value) {
@@ -55,11 +57,20 @@ class Blog {
       }
     });
 
-    if (content.isEmpty) {
+    if (content == null) {
       content = title;
     }
-    publishDate = DateTime.now().millisecondsSinceEpoch;
 
-    return HiveBox.blogBox.add(this);
+    if (publishDate == null) {
+      publishDate = DateTime.now().millisecondsSinceEpoch;
+    }
+
+    if (id == null) {
+      id = await HiveBox.blogBox.add(this);
+    } else {
+      await HiveBox.blogBox.put(id, this);
+    }
+
+    return this;
   }
 }

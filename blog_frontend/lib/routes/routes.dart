@@ -1,3 +1,4 @@
+import 'package:blog_frontend/admin/blog/blog_edit_page.dart';
 import 'package:blog_frontend/admin/home/home_page.dart';
 import 'package:blog_frontend/admin/user/login_middleware.dart';
 import 'package:blog_frontend/admin/user/login_page.dart';
@@ -10,6 +11,7 @@ abstract class _Paths {
   static const login = '/login';
 
   static const admin = '/admin';
+  static const blogEdit = '/blogEdit';
 }
 
 /// 路由管理器
@@ -20,6 +22,7 @@ class Routes {
 
   static const admin = _Paths.admin;
   static const login = admin + _Paths.login;
+  static const blogEdit = admin + _Paths.blogEdit;
 
   static final routes = [
     GetPage(
@@ -39,5 +42,8 @@ class Routes {
         name: login,
         page: () => const AdminLoginPage(),
         binding: AdminLoginBinding()),
+
+    GetPage(
+        name: blogEdit, page: () => BlogEditPage(), binding: BlogEditBinding()),
   ];
 }

@@ -1,18 +1,21 @@
-import 'package:blog_frontend/admin/blog/blog_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 
-class BlogCreatePageController extends BaseController {
+class BlogEditBinding extends Bindings {
+  @override
+  void dependencies() => Get.lazyPut(() => BlogEditPageController());
+}
+
+class BlogEditPageController extends BaseController {
   @override
   void onReady() {}
 }
 
-class BlogCreatePage extends BasePage<BlogCreatePageController> {
-  final BlogController blogController;
-
+class BlogEditPage extends BasePage<BlogEditPageController> {
   final TextEditingController titleController = TextEditingController();
 
-  BlogCreatePage(this.blogController);
+  BlogEditPage({super.key});
 
   @override
   Widget buildPage(BuildContext context) {

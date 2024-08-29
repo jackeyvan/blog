@@ -1,5 +1,6 @@
 import 'package:blog_frontend/api/blog_repository.dart';
 import 'package:blog_frontend/model/blog_model.dart';
+import 'package:blog_frontend/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
@@ -8,9 +9,27 @@ class BlogController extends BaseController<List<BlogModel>> {
   @override
   void onReady() {
     BlogRepository.fetchBlogs().then((value) {
-      data = value;
-      showSuccessPage();
+      handleResult(value);
+    }).catchError((e, _) {
+      showErrorPage(e.toString());
     });
+  }
+
+  void handleResult(List<BlogModel> value) {
+    if (value.isEmpty) {
+      showEmptyPage();
+      return;
+    }
+
+    data = data ?? [];
+
+    if (data!.isEmpty) {
+      data!.insert(0, BlogModel());
+    }
+
+    data!.addAll(value);
+
+    showSuccessPage();
   }
 }
 
@@ -49,7 +68,7 @@ class AdminBlogPage extends BasePage<BlogController> {
         ]));
   }
 
-  buildBlogItem(int index) {
+  Widget buildBlogItem(int index) {
     final data = (controller.data ?? [])[index];
 
     final isFirst = index == 0;
@@ -74,15 +93,22 @@ class AdminBlogPage extends BasePage<BlogController> {
             ? const Text("操作")
             : Row(
                 children: [
-                  TextButton(onPressed: () {}, child: const Text("编辑")),
-                  TextButton(onPressed: () {}, child: const Text("删除")),
+                  TextButton(
+                      onPressed: () =>
+                          Get.toNamed(Routes.blogEdit, arguments: data),
+                      child: const Text("编辑")),
+                  TextButton(onPressed: () {}, child: const Text("修改")),
+                  TextButton(onPressed: () {}, child: const Text("查看")),
+                  TextButton(
+                      onPressed: () => deleteBlog(data.id, index),
+                      child: const Text("删除")),
                 ],
               ),
       ),
     ]);
   }
 
-  showCreateBlogDialog(BuildContext context) {
+  void showCreateBlogDialog(BuildContext context) {
     TextEditingController titleController = TextEditingController();
     TextEditingController tagController = TextEditingController();
     TextEditingController categoryController = TextEditingController();
@@ -92,14 +118,11 @@ class AdminBlogPage extends BasePage<BlogController> {
       final tag = tagController.text;
       final category = categoryController.text;
 
-      BlogRepository.createBlog(BlogModel(
-          title: title,
-          content: "",
-          category: category,
-          tags: [tag])).then((response) {
+      BlogRepository.createBlog(
+              BlogModel(title: title, category: category, tags: [tag]))
+          .then((response) {
         OverlayUtils.showToast("创建成功");
-        controller.data?.add(response);
-        controller.showSuccessPage();
+        controller.handleResult([response]);
         Get.back();
       });
     }
@@ -141,7 +164,7 @@ class AdminBlogPage extends BasePage<BlogController> {
             ));
   }
 
-  textFiledInput(
+  Widget textFiledInput(
       {required String title,
       String? hintTitle,
       TextEditingController? controller}) {
@@ -159,5 +182,15 @@ class AdminBlogPage extends BasePage<BlogController> {
         controller: controller,
       ))
     ]);
+  }
+
+  void deleteBlog(int? id, int index) {
+    BlogRepository.deleteBlog(id ?? 0).then((e) {
+      controller.data?.removeAt(index);
+      controller.showSuccessPage();
+      OverlayUtils.showToast("删除成功");
+    }).catchError((e, _) {
+      OverlayUtils.showToast(e.toString());
+    });
   }
 }

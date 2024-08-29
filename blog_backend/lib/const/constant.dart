@@ -9,4 +9,5 @@ class Constant {
   static final userAlreadyHed = "用户已存在";
   static final userPasswordWrong = "账号或密码错误";
   static final tokenExpired = "用户Token过期";
+  static final blogDontHad = "该博客不存在";
 }

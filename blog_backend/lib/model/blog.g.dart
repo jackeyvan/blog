@@ -18,7 +18,7 @@ class BlogAdapter extends TypeAdapter<Blog> {
     };
     return Blog(
       title: fields[0] as String,
-      content: fields[1] as String,
+      content: fields[1] as String?,
       category: fields[2] as String,
       tags: (fields[3] as List).cast<String>(),
       publishDate: fields[4] as int?,
