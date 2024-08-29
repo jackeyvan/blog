@@ -1,6 +1,7 @@
 import 'package:blog_frontend/api/blog_repository.dart';
 import 'package:blog_frontend/model/blog_model.dart';
 import 'package:blog_frontend/routes/routes.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
@@ -77,14 +78,33 @@ class AdminBlogPage extends BasePage<BlogController> {
     final title = isFirst ? "标题" : "${data.title}";
     final category = isFirst ? "分类" : "${data.category}";
     final tags = isFirst ? "标签" : "${data.tags?[0]}";
-    final publishDate = isFirst ? "发布时间" : "${data.publishDate}";
+
+    final dateTime = DateTime.fromMillisecondsSinceEpoch(data.publishDate ?? 0);
+    final publishTime = formatDate(dateTime, [
+      yyyy,
+      '-',
+      mm,
+      '-',
+      dd,
+      '  ',
+      HH,
+      ':',
+      nn,
+      ':',
+      ss,
+    ]);
+
+    final publishDate = isFirst ? "发布时间" : publishTime;
 
     return Row(children: [
       SizedBox(
         width: 160,
         child: Center(child: Text(id)),
       ),
-      Expanded(child: Text(title)),
+      Expanded(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(title))),
       Expanded(child: Text(category)),
       Expanded(child: Text(tags)),
       Expanded(child: Text(publishDate)),
