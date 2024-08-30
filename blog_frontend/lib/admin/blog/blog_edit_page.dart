@@ -13,6 +13,10 @@ class BlogEditBinding extends Bindings {
 class BlogEditPageController extends BaseController {
   final BlogModel? blog = Get.arguments;
 
+  final initialText =
+      '[Welcome for pull request](https://github.com/asjqkkkk/markdown_widget)😄\n\n'
+          .obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -56,14 +60,67 @@ class BlogEditPage extends BasePage<BlogEditPageController> {
           ),
           body: Row(
             children: [
-              Expanded(
-                  child: TextField(
-                controller: editingController,
-                onChanged: (text) {},
-              )),
-              Expanded(child: MarkdownWidget(data: editingController.text)),
+              Expanded(child: buildEditWidget()),
+              Expanded(child: buildMarkdownWidget()),
             ],
           ),
         ));
   }
+
+  Widget buildEditWidget() {
+    return Container(
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        border: Border.all(
+          color: Colors.black,
+          width: 3,
+        ),
+      ),
+      child: TextFormField(
+        expands: true,
+        maxLines: null,
+        textInputAction: TextInputAction.newline,
+        controller: editingController,
+        onChanged: (text) {
+          controller.initialText.value = text;
+        },
+        style: const TextStyle(textBaseline: TextBaseline.alphabetic),
+        decoration: const InputDecoration(
+            contentPadding: EdgeInsets.all(10),
+            border: InputBorder.none,
+            hintText: 'Input Here...',
+            hintStyle: TextStyle(color: Colors.grey)),
+      ),
+    );
+  }
+
+  Widget buildMarkdownWidget() {
+    return Obx(() => MarkdownWidget(data: controller.initialText.value));
+  }
 }
+
+// StoreConnector<RootState, ThemeState>(
+// converter: ThemeState.storeConverter,
+// builder: (context, snapshot) {
+// final config =
+// isDark ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig;
+// final codeWrapper = (child, text, language) =>
+// CodeWrapperWidget(child, text, language);
+// return MarkdownWidget(
+// data: initialText + controller.text,
+// config: config.copy(configs: [
+// isDark
+// ? PreConfig.darkConfig.copy(wrapper: codeWrapper)
+//     : const PreConfig().copy(wrapper: codeWrapper)
+// ]),
+// markdownGenerator: MarkdownGenerator(
+// generators: [videoGeneratorWithTag, latexGenerator],
+// inlineSyntaxList: [LatexSyntax()],
+// textGenerator: (node, config, visitor) =>
+// CustomTextNode(node.textContent, config, visitor),
+// richTextBuilder: (span) => Text.rich(span, textScaleFactor: 1),
+// ),
+// );
+// });
