@@ -15,7 +15,6 @@ class BlogApiPath {
   static const blogCreate = "$preFix/blog/create";
   static const blogDelete = "$preFix/blog/delete";
   static const blogUpdate = "$preFix/blog/update";
-  static const blogEdit = "$preFix/blog/edit";
 }
 
 class BlogRepository {
@@ -46,10 +45,9 @@ class BlogRepository {
     return _api.post(BlogApiPath.blogDelete, body: jsonEncode({"id": id}));
   }
 
-  static Future<BlogModel> updateOrEditBlog(bool isUpdate, BlogModel blog) {
+  static Future<BlogModel> updateBlog(BlogModel blog) {
     return _api
-        .post(isUpdate ? BlogApiPath.blogUpdate : BlogApiPath.blogEdit,
-            body: blog.toJson())
+        .post(BlogApiPath.blogUpdate, body: blog.toJson())
         .then((data) => BlogModel.fromJson(data));
   }
 }

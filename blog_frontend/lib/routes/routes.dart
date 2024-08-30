@@ -11,7 +11,7 @@ abstract class _Paths {
   static const login = '/login';
 
   static const admin = '/admin';
-  static const blogEdit = '/blogEdit';
+  static const blogEdit = '/edit';
 }
 
 /// 路由管理器

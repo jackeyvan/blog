@@ -15,6 +15,7 @@ class Blog {
   List<String> tags;
   @HiveField(4)
   int? publishDate;
+  @HiveField(5)
   int? id;
 
   Blog({
@@ -67,9 +68,8 @@ class Blog {
 
     if (id == null) {
       id = await HiveBox.blogBox.add(this);
-    } else {
-      await HiveBox.blogBox.put(id, this);
     }
+    await HiveBox.blogBox.put(id, this);
 
     return this;
   }

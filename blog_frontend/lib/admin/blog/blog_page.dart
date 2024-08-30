@@ -111,7 +111,7 @@ class AdminBlogPage extends BasePage<BlogController> {
       Expanded(
         child: isFirst
             ? const Text("操作")
-            : Row(
+            : Wrap(
                 children: [
                   TextButton(
                       onPressed: () =>
