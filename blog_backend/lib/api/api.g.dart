@@ -40,6 +40,11 @@ Router _$V1ApiRouter(V1Api service) {
   );
   router.add(
     'POST',
+    r'/blog/get',
+    service.fetchBlog,
+  );
+  router.add(
+    'POST',
     r'/blog/create',
     service.crateBlog,
   );

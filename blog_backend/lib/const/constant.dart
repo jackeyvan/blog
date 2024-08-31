@@ -10,4 +10,5 @@ class Constant {
   static final userPasswordWrong = "账号或密码错误";
   static final tokenExpired = "用户Token过期";
   static final blogDontHad = "该博客不存在";
+  static final blogFailed = "获取博客失败";
 }

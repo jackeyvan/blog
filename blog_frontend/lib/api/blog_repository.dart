@@ -11,6 +11,7 @@ class BlogApiPath {
   static const preFix = "/api/v1";
 
   static const login = "$preFix/user/login";
+  static const blogGet = "$preFix/blog/get";
   static const blogList = "$preFix/blog/list";
   static const blogCreate = "$preFix/blog/create";
   static const blogDelete = "$preFix/blog/delete";
@@ -33,6 +34,12 @@ class BlogRepository {
   static Future<List<BlogModel>> fetchBlogs() {
     return _api.post(BlogApiPath.blogList).then(
         (e) => (e as List).map((json) => BlogModel.fromJson(json)).toList());
+  }
+
+  static Future<BlogModel> fetchBlog(int id) {
+    return _api
+        .post(BlogApiPath.blogGet, body: jsonEncode({"id": id}))
+        .then((e) => BlogModel.fromJson(e));
   }
 
   static Future<BlogModel> createBlog(BlogModel blog) {

@@ -73,6 +73,20 @@ class V1Api extends BaseApi {
     return success(data: HiveBox.blogBox.values.toList());
   }
 
+  @Route.post('/blog/get')
+  Future<Response> fetchBlog(Request request) async {
+    final params = jsonDecode(await request.readAsString());
+    final id = params["id"];
+    if (id != null) {
+      final blog = HiveBox.blogBox.get(id);
+      if (blog != null) {
+        return success(data: blog);
+      }
+    }
+
+    return failed(message: Constant.blogFailed);
+  }
+
   @Route.post('/blog/create')
   Future<Response> crateBlog(Request request) async {
     final params = jsonDecode(await request.readAsString());

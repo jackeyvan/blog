@@ -11,56 +11,54 @@ class BlogEditBinding extends Bindings {
 }
 
 class BlogEditPageController extends BaseController {
-  final BlogModel? blog = Get.arguments;
+  final Rx<BlogModel> blog = BlogModel().obs;
+  final initialText = "".obs;
 
-  final initialText =
-      '[Welcome for pull request](https://github.com/asjqkkkk/markdown_widget)😄\n\n'
-          .obs;
+  final TextEditingController editingController = TextEditingController();
 
   @override
-  void onInit() {
-    super.onInit();
+  void onReady() {
+    final id = int.parse(Get.parameters["id"] ?? "0");
+    BlogRepository.fetchBlog(id).then((value) {
+      final content = value.content ?? "";
+      initialText.value = content;
+      editingController.text = content;
+      blog.value = value;
+    });
   }
 
-  @override
-  void onReady() {}
-
-  void saveBlog(String text) {
-    blog?.content = text;
-
-    if (blog != null) {
-      BlogRepository.updateBlog(blog!).then((value) {
-        OverlayUtils.showToast("保存成功");
-      }).catchError((e, _) {
-        OverlayUtils.showToast(e.toString());
-      });
-    }
+  void saveBlog() {
+    blog.value.content = editingController.text;
+    BlogRepository.updateBlog(blog.value).then((value) {
+      OverlayUtils.showToast("保存成功");
+    }).catchError((e, _) {
+      OverlayUtils.showToast(e.toString());
+    });
   }
 }
 
 class BlogEditPage extends BasePage<BlogEditPageController> {
-  final TextEditingController editingController = TextEditingController();
-
-  BlogEditPage({super.key});
+  const BlogEditPage({super.key});
 
   @override
   Widget buildPage(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(36),
+        padding: const EdgeInsets.all(24),
         child: Scaffold(
           appBar: AppBar(
-            title: Text(controller.blog?.title ?? "博客编辑"),
+            title: Obx(() => Text("${controller.blog.value.title}")),
             automaticallyImplyLeading: false,
             actions: [
               TextButton(
-                  onPressed: () => controller.saveBlog(editingController.text),
+                  onPressed: () => controller.saveBlog(),
                   child: const Text("保存")),
-              TextButton(onPressed: () => Get.back(), child: const Text("取消")),
+              TextButton(onPressed: () => Get.back(), child: const Text("返回")),
             ],
           ),
           body: Row(
             children: [
               Expanded(child: buildEditWidget()),
+              const SizedBox(width: 8),
               Expanded(child: buildMarkdownWidget()),
             ],
           ),
@@ -69,20 +67,20 @@ class BlogEditPage extends BasePage<BlogEditPageController> {
 
   Widget buildEditWidget() {
     return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         border: Border.all(
           color: Colors.black,
-          width: 3,
+          width: 1,
         ),
       ),
       child: TextFormField(
         expands: true,
         maxLines: null,
         textInputAction: TextInputAction.newline,
-        controller: editingController,
+        controller: controller.editingController,
         onChanged: (text) {
           controller.initialText.value = text;
         },
@@ -90,7 +88,6 @@ class BlogEditPage extends BasePage<BlogEditPageController> {
         decoration: const InputDecoration(
             contentPadding: EdgeInsets.all(10),
             border: InputBorder.none,
-            hintText: 'Input Here...',
             hintStyle: TextStyle(color: Colors.grey)),
       ),
     );

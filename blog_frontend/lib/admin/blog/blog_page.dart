@@ -114,8 +114,8 @@ class AdminBlogPage extends BasePage<BlogController> {
             : Wrap(
                 children: [
                   TextButton(
-                      onPressed: () =>
-                          Get.toNamed(Routes.blogEdit, arguments: data),
+                      onPressed: () => Get.toNamed(Routes.blogEdit,
+                          parameters: {"id": data.id?.toString() ?? ""}),
                       child: const Text("编辑")),
                   TextButton(onPressed: () {}, child: const Text("修改")),
                   TextButton(onPressed: () {}, child: const Text("查看")),
