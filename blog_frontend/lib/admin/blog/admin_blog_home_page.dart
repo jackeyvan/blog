@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 
-class BlogController extends BaseController<List<BlogModel>> {
+class AdminBlogHomeController extends BaseController<List<BlogModel>> {
   @override
   void onReady() {
     BlogRepository.fetchBlogs().then((value) {
@@ -34,11 +34,11 @@ class BlogController extends BaseController<List<BlogModel>> {
   }
 }
 
-class AdminBlogPage extends BasePage<BlogController> {
-  const AdminBlogPage({super.key});
+class AdminBlogHomePage extends BasePage<AdminBlogHomeController> {
+  const AdminBlogHomePage({super.key});
 
   @override
-  void dependencies() => Get.lazyPut(() => BlogController());
+  void dependencies() => Get.lazyPut(() => AdminBlogHomeController());
 
   @override
   Widget buildPage(BuildContext context) {
@@ -114,11 +114,12 @@ class AdminBlogPage extends BasePage<BlogController> {
             : Wrap(
                 children: [
                   TextButton(
-                      onPressed: () => Get.toNamed(Routes.blogEdit,
-                          parameters: {"id": data.id?.toString() ?? ""}),
+                      onPressed: () => toNamed(Routes.blogEdit, data),
                       child: const Text("编辑")),
                   TextButton(onPressed: () {}, child: const Text("修改")),
-                  TextButton(onPressed: () {}, child: const Text("查看")),
+                  TextButton(
+                      onPressed: () => toNamed(Routes.blogPreview, data),
+                      child: const Text("查看")),
                   TextButton(
                       onPressed: () => deleteBlog(data.id, index),
                       child: const Text("删除")),
@@ -126,6 +127,10 @@ class AdminBlogPage extends BasePage<BlogController> {
               ),
       ),
     ]);
+  }
+
+  void toNamed(String route, BlogModel? data) {
+    Get.toNamed(route, parameters: {"id": data?.id?.toString() ?? ""});
   }
 
   void showCreateBlogDialog(BuildContext context) {

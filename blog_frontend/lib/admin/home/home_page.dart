@@ -1,4 +1,4 @@
-import 'package:blog_frontend/admin/blog/blog_page.dart';
+import 'package:blog_frontend/admin/blog/admin_blog_home_page.dart';
 import 'package:blog_frontend/admin/book/book_page.dart';
 import 'package:blog_frontend/model/drawer_model.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +48,7 @@ class AdminHomePage extends BasePage<RootController> {
         case 1:
           return keepWidgetAlive(BookPage());
         case 2:
-          return keepWidgetAlive(AdminBlogPage());
+          return keepWidgetAlive(AdminBlogHomePage());
 
         default:
           return Center(child: Text("博客管理后台"));

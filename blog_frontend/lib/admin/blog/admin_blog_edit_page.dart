@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:get_core/get_core.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 
-class BlogEditBinding extends Bindings {
+class AdminBlogEditBinding extends Bindings {
   @override
-  void dependencies() => Get.lazyPut(() => BlogEditPageController());
+  void dependencies() => Get.lazyPut(() => AdminBlogEditPageController());
 }
 
-class BlogEditPageController extends BaseController {
+class AdminBlogEditPageController extends BaseController {
   final Rx<BlogModel> blog = BlogModel().obs;
   final initialText = "".obs;
 
@@ -37,8 +37,8 @@ class BlogEditPageController extends BaseController {
   }
 }
 
-class BlogEditPage extends BasePage<BlogEditPageController> {
-  const BlogEditPage({super.key});
+class AdminBlogEditPage extends BasePage<AdminBlogEditPageController> {
+  const AdminBlogEditPage({super.key});
 
   @override
   Widget buildPage(BuildContext context) {
