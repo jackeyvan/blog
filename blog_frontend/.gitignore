@@ -49,3 +49,4 @@ app.*.map.json
 .metadata
 
 pubspec.lock
+analysis_options.yaml
