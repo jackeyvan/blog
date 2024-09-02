@@ -62,14 +62,14 @@ class AdminBlogHomePage extends BasePage<AdminBlogHomeController> {
               itemBuilder: (context, index) {
                 return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: buildBlogItem(index));
+                    child: buildBlogItem(context, index));
               },
             );
           })),
         ]));
   }
 
-  Widget buildBlogItem(int index) {
+  Widget buildBlogItem(BuildContext context, int index) {
     final data = (controller.data ?? [])[index];
 
     final isFirst = index == 0;
@@ -116,7 +116,10 @@ class AdminBlogHomePage extends BasePage<AdminBlogHomeController> {
                   TextButton(
                       onPressed: () => toNamed(Routes.blogEdit, data),
                       child: const Text("编辑")),
-                  TextButton(onPressed: () {}, child: const Text("修改")),
+                  TextButton(
+                      onPressed: () =>
+                          showCreateBlogDialog(context, blog: data),
+                      child: const Text("修改")),
                   TextButton(
                       onPressed: () => toNamed(Routes.blogPreview, data),
                       child: const Text("查看")),
@@ -133,8 +136,9 @@ class AdminBlogHomePage extends BasePage<AdminBlogHomeController> {
     Get.toNamed(route, parameters: {"id": data?.id?.toString() ?? ""});
   }
 
-  void showCreateBlogDialog(BuildContext context) {
-    TextEditingController titleController = TextEditingController();
+  void showCreateBlogDialog(BuildContext context, {BlogModel? blog}) {
+    TextEditingController titleController =
+        TextEditingController(text: blog?.title);
     TextEditingController tagController = TextEditingController();
     TextEditingController categoryController = TextEditingController();
 

@@ -29,21 +29,21 @@ class AdminBlogPreviewPage extends BasePage<AdminBlogPreviewController> {
   Widget buildPage(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Obx(() => Text("${controller.blogModel?.title}")),
+          title: Obx(() => Text("${controller.blogModel?.title ?? ""}")),
           centerTitle: true,
+          toolbarHeight: 120,
+          titleTextStyle: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
           automaticallyImplyLeading: false),
       body: LayoutBuilder(builder: (context, constraints) {
         return Row(children: [
-          Expanded(child: SizedBox(), flex: 1),
+          Expanded(child: SizedBox()),
           Expanded(
-              child: SingleChildScrollView(
-                child: Obx(
-                  () =>
-                      MarkdownWidget(data: "${controller.blogModel?.content}"),
-                ),
-              ),
+              child: Obx(() => MarkdownWidget(
+                    data: "${controller.blogModel?.content ?? ""}",
+                    shrinkWrap: true,
+                  )),
               flex: 1),
-          Expanded(child: SizedBox(), flex: 1),
+          Expanded(child: SizedBox()),
         ]);
       }),
     );

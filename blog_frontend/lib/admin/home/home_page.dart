@@ -48,10 +48,8 @@ class AdminHomePage extends BasePage<RootController> {
         case 1:
           return keepWidgetAlive(BookPage());
         case 2:
-          return keepWidgetAlive(AdminBlogHomePage());
-
         default:
-          return Center(child: Text("博客管理后台"));
+          return keepWidgetAlive(AdminBlogHomePage());
       }
     });
   }
