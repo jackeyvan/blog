@@ -3,7 +3,7 @@ import 'package:blog_frontend/admin/blog/admin_blog_preview_page.dart';
 import 'package:blog_frontend/admin/home/home_page.dart';
 import 'package:blog_frontend/admin/user/login_middleware.dart';
 import 'package:blog_frontend/admin/user/login_page.dart';
-import 'package:blog_frontend/app/home_page.dart';
+import 'package:blog_frontend/app/home/home_page.dart';
 import 'package:get/get.dart';
 
 abstract class _Paths {
@@ -30,8 +30,8 @@ class Routes {
   static final routes = [
     GetPage(
       name: home,
-      page: () => const HomePage(),
-      // binding: HomeBinding()
+      page: () => HomePage(),
+      binding: HomeBinding(),
     ),
     // GetPage(name: test, page: () => const TestPage()),
 
@@ -49,11 +49,13 @@ class Routes {
     GetPage(
         name: blogEdit,
         page: () => AdminBlogEditPage(),
-        binding: AdminBlogEditBinding()),
+        binding: AdminBlogEditBinding(),
+        middlewares: [AdminLoginMiddleware()]),
 
     GetPage(
         name: blogPreview,
         page: () => AdminBlogPreviewPage(),
-        binding: AdminBlogPreviewBinding()),
+        binding: AdminBlogPreviewBinding(),
+        middlewares: [AdminLoginMiddleware()]),
   ];
 }
