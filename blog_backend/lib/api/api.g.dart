@@ -45,18 +45,13 @@ Router _$V1ApiRouter(V1Api service) {
   );
   router.add(
     'POST',
-    r'/blog/create',
-    service.crateBlog,
+    r'/blog/edit',
+    service.createOrUpdateBlog,
   );
   router.add(
     'POST',
     r'/blog/delete',
     service.deleteBlog,
-  );
-  router.add(
-    'POST',
-    r'/blog/update',
-    service.updateBlog,
   );
   router.add(
     'POST',

@@ -6,6 +6,7 @@ class BlogModel {
     this.tags,
     this.publishDate,
     this.id,
+    this.published,
   });
 
   BlogModel.fromJson(dynamic json) {
@@ -15,6 +16,7 @@ class BlogModel {
     tags = json['tags'] != null ? json['tags'].cast<String>() : [];
     publishDate = json['publishDate'];
     id = json['id'];
+    published = json['published'];
   }
 
   String? title;
@@ -23,6 +25,7 @@ class BlogModel {
   List<String>? tags;
   int? publishDate;
   int? id;
+  int? published;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -32,6 +35,7 @@ class BlogModel {
     map['tags'] = tags;
     map['publishDate'] = publishDate;
     map['id'] = id;
+    map['published'] = published;
     return map;
   }
 }

@@ -13,9 +13,10 @@ class BlogApiPath {
   static const login = "$preFix/user/login";
   static const blogGet = "$preFix/blog/get";
   static const blogList = "$preFix/blog/list";
-  static const blogCreate = "$preFix/blog/create";
   static const blogDelete = "$preFix/blog/delete";
-  static const blogUpdate = "$preFix/blog/update";
+  static const blogEdit = "$preFix/blog/edit";
+  static const blogTags = "$preFix/blog/tags";
+  static const blogCategory = "$preFix/blog/category";
 }
 
 class BlogRepository {
@@ -42,9 +43,9 @@ class BlogRepository {
         .then((e) => BlogModel.fromJson(e));
   }
 
-  static Future<BlogModel> createBlog(BlogModel blog) {
+  static Future<BlogModel> createOrUpdateBlog(BlogModel blog) {
     return _api
-        .post(BlogApiPath.blogCreate, body: blog.toJson())
+        .post(BlogApiPath.blogEdit, body: blog.toJson())
         .then((data) => BlogModel.fromJson(data));
   }
 
@@ -52,9 +53,15 @@ class BlogRepository {
     return _api.post(BlogApiPath.blogDelete, body: jsonEncode({"id": id}));
   }
 
-  static Future<BlogModel> updateBlog(BlogModel blog) {
+  static Future<List<String>> fetchBlogTags() {
     return _api
-        .post(BlogApiPath.blogUpdate, body: blog.toJson())
-        .then((data) => BlogModel.fromJson(data));
+        .post(BlogApiPath.blogTags)
+        .then((e) => (e as List).map((value) => value as String).toList());
+  }
+
+  static Future<List<String>> fetchBlogCategory() {
+    return _api
+        .post(BlogApiPath.blogCategory)
+        .then((e) => (e as List).map((value) => value as String).toList());
   }
 }

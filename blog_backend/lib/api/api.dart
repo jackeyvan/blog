@@ -87,8 +87,8 @@ class V1Api extends BaseApi {
     return failed(message: Constant.blogFailed);
   }
 
-  @Route.post('/blog/create')
-  Future<Response> crateBlog(Request request) async {
+  @Route.post('/blog/edit')
+  Future<Response> createOrUpdateBlog(Request request) async {
     final params = jsonDecode(await request.readAsString());
     final blog = Blog.fromJson(params);
     return success(data: await blog.save());
@@ -103,13 +103,6 @@ class V1Api extends BaseApi {
       return success();
     }
     return failed(message: Constant.blogDontHad);
-  }
-
-  @Route.post('/blog/update')
-  Future<Response> updateBlog(Request request) async {
-    final params = jsonDecode(await request.readAsString());
-    final blog = Blog.fromJson(params);
-    return success(data: await blog.save());
   }
 
   @Route.post('/blog/tags')

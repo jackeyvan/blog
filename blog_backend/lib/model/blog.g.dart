@@ -21,6 +21,7 @@ class BlogAdapter extends TypeAdapter<Blog> {
       content: fields[1] as String?,
       category: fields[2] as String,
       tags: (fields[3] as List).cast<String>(),
+      published: fields[6] as int,
       publishDate: fields[4] as int?,
       id: fields[5] as int?,
     );
@@ -29,7 +30,7 @@ class BlogAdapter extends TypeAdapter<Blog> {
   @override
   void write(BinaryWriter writer, Blog obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class BlogAdapter extends TypeAdapter<Blog> {
       ..writeByte(4)
       ..write(obj.publishDate)
       ..writeByte(5)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(6)
+      ..write(obj.published);
   }
 
   @override

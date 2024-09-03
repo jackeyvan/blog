@@ -18,11 +18,15 @@ class Blog {
   @HiveField(5)
   int? id;
 
+  @HiveField(6)
+  int published;
+
   Blog({
     required this.title,
     required this.content,
     required this.category,
     required this.tags,
+    required this.published,
     this.publishDate,
     this.id,
   });
@@ -35,6 +39,7 @@ class Blog {
       "tags": tags,
       "id": id,
       "publishDate": publishDate,
+      "published": published,
     };
   }
 
@@ -45,6 +50,7 @@ class Blog {
       publishDate: json["publishDate"] as int?,
       id: json["id"] as int?,
       category: json["category"],
+      published: json["published"],
       tags: (json["tags"] as List).map((e) => e as String).toList(),
     );
   }
@@ -53,14 +59,8 @@ class Blog {
     HiveBox.blogCategoryBox.put(category, category);
 
     tags.forEach((value) {
-      if (!HiveBox.blogCategoryBox.containsKey(value)) {
-        HiveBox.blogCategoryBox.put(value, value);
-      }
+      HiveBox.blogTagBox.put(value, value);
     });
-
-    if (content == null) {
-      content = title;
-    }
 
     if (publishDate == null) {
       publishDate = DateTime.now().millisecondsSinceEpoch;
