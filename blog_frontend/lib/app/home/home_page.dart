@@ -39,8 +39,8 @@ class HomePage extends BasePage<HomeController> {
   @override
   Widget buildPage(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        bottom: TabBar(
+      appBar: CustomAppBar(
+        tabBar: TabBar(
             dividerHeight: 0,
             tabAlignment: TabAlignment.center,
             onTap: (index) {},
@@ -48,9 +48,42 @@ class HomePage extends BasePage<HomeController> {
             controller: controller.tabController),
       ),
       body: TabBarView(
-          children: controller.pages, controller: controller.tabController),
+          physics: NeverScrollableScrollPhysics(),
+          children: controller.pages,
+          controller: controller.tabController),
     );
   }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final TabBar tabBar;
+
+  final height = 100.0;
+  final titlePadding = 72.0;
+
+  const CustomAppBar({super.key, required this.tabBar});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      color: Colors.grey.shade200,
+      child: Wrap(
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        alignment: WrapAlignment.center,
+        children: [
+          Text("万合天宜",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500)),
+          SizedBox(width: titlePadding),
+          tabBar
+        ],
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size(double.infinity, height);
 }
 
 class CustomTab extends StatelessWidget {
